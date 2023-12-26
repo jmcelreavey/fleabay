@@ -188,14 +188,14 @@ export default function Header({ userId }: { userId?: string }) {
             <UnstyledButton component={Link} href={userId ? "/dashboard" : "/"}>
               <Flex gap="xs" align="center">
                 <Image
-                  src="/images/logo.png"
-                  alt="eBoto Logo"
+                  src="/images/logo.svg"
+                  alt="FleaBay Logo"
                   width={32}
                   height={32}
                   priority
                 />
                 <Text fw={600} visibleFrom="xs">
-                  eBoto
+                  FleaBay
                 </Text>
               </Flex>
             </UnstyledButton>

@@ -1055,7 +1055,7 @@ export default function EditCandidate({
                 <ActionIcon
                   size="lg"
                   variant="outline"
-                  color="green"
+                  color="brown"
                   hiddenFrom="xs"
                 >
                   <IconExternalLink size="1.25rem" />

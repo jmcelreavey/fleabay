@@ -27,7 +27,7 @@ export default function GenerateResultRow({
 
         borderWidth: 2,
         borderStyle: "solid",
-        borderColor: "var(--mantine-color-green-light-hover)",
+        borderColor: "var(--mantine-color-brown-light-hover)",
       })}
     >
       <Box>

@@ -12,8 +12,8 @@
 
 .boost {
   border-color: light-dark(
-    var(--mantine-color-green-5),
-    var(--mantine-color-green-8)
+    var(--mantine-color-brown-5),
+    var(--mantine-color-brown-8)
   );
   flex: 5;
 }

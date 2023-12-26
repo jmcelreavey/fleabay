@@ -1,10 +1,10 @@
+import "@mantine/carousel/styles.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/dropzone/styles.css";
 import "@mantine/notifications/styles.css";
-import "mantine-react-table/styles.css";
 import "@mantine/spotlight/styles.css";
-import "@mantine/carousel/styles.css";
+import "mantine-react-table/styles.css";
 
 import type { Metadata } from "next";
 import {
@@ -95,14 +95,26 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       <body className={font.className}>
         <MantineProvider
           theme={{
-            primaryColor: "green",
+            primaryColor: "brown",
             fontFamily: font.style.fontFamily,
             defaultGradient: {
-              from: "green",
-              to: "#6BD731",
+              from: "#faf4f0",
+              to: "#824f2b",
               deg: 5,
             },
             colors: {
+              brown: [
+                "#faf4f0",
+                "#efe6e0",
+                "#e0cabb",
+                "#d2ad93",
+                "#c79471",
+                "#bf845b",
+                "#bd7c4f",
+                "#a66a40",
+                "#945d36",
+                "#824f2b",
+              ],
               dark: [
                 "#C1C2C5",
                 "#A6A7AB",

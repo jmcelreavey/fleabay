@@ -473,7 +473,7 @@ export default function DashboardElection({
                       component={Link}
                       justify="left"
                       color={
-                        item.path === pathname?.split("/")[3] ? "green" : "gray"
+                        item.path === pathname?.split("/")[3] ? "brown" : "gray"
                       }
                       fw="normal"
                       fz="sm"

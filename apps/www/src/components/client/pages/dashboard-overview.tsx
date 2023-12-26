@@ -232,7 +232,7 @@ export default function DashboardOverview({
                 <Title>
                   <NumberFormatter thousandSeparator value={stat.count} />
                 </Title>
-                <Text tt="uppercase" fw={700} c="green">
+                <Text tt="uppercase" fw={700} c="brown">
                   {stat.title}
                 </Text>
               </Box>
@@ -299,7 +299,7 @@ export default function DashboardOverview({
                     "(0%)"
                   ))}
               </Title>
-              <Text tt="uppercase" fw={700} c="green">
+              <Text tt="uppercase" fw={700} c="brown">
                 {stat.title}
               </Text>
               <Text fz="sm" c="dimmed">

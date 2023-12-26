@@ -8,8 +8,7 @@ import { SES } from "@aws-sdk/client-ses";
 //   throw new Error("AWS_SECRET_ACCESS_KEY is not defined");
 
 export const ses = new SES({
-  region: process.env.AWS_SES_REGION,
-
+  // region: process.env.AWS_SES_REGION,
   // credentials: {
   //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,

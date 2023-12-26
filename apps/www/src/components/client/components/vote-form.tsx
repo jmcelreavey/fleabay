@@ -404,8 +404,8 @@ function VoteCard({
           borderStyle: "solid",
           borderColor: isSelected
             ? colorScheme === "light"
-              ? theme.colors.green[6]
-              : theme.colors.green[8]
+              ? theme.colors.brown[6]
+              : theme.colors.brown[8]
             : colorScheme === "light"
               ? theme.colors.gray[3]
               : theme.colors.gray[7],
@@ -416,8 +416,8 @@ function VoteCard({
             : "transparent",
           color: isSelected
             ? colorScheme === "light"
-              ? theme.colors.green[6]
-              : theme.colors.green[8]
+              ? theme.colors.brown[6]
+              : theme.colors.brown[8]
             : theme.colors.gray[6],
           borderRadius: theme.radius.md,
           display: "flex",

@@ -17,15 +17,15 @@
 }
 
 .highlight {
-  color: light-dark(var(--mantine-color-green-7), var(--mantine-color-green-5));
+  color: light-dark(var(--mantine-color-brown-7), var(--mantine-color-brown-5));
 }
 
 .cta {
   border-radius: var(--mantine-radius-lg);
   background: linear-gradient(
     45deg,
-    light-dark(var(--mantine-color-green-6), var(--mantine-color-green-8)) 0%,
-    light-dark(var(--mantine-color-green-7), var(--mantine-color-green-9)) 100%
+    light-dark(var(--mantine-color-brown-6), var(--mantine-color-brown-8)) 0%,
+    light-dark(var(--mantine-color-brown-7), var(--mantine-color-brown-9)) 100%
   );
   color: var(--mantine-color-white);
   padding: var(--mantine-spacing-xl);

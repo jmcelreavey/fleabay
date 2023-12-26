@@ -108,7 +108,7 @@ export default function DashboardCard({
                   style={{
                     display: "grid",
                     placeItems: "center",
-                    background: "var(--mantine-color-green-filled)",
+                    background: "var(--mantine-color-brown-filled)",
                     borderRadius: "100%",
                     width: 48,
                     height: 48,
@@ -150,7 +150,7 @@ export default function DashboardCard({
                       display: "grid",
                       placeItems: "center",
                       backgroundColor: hasVoted
-                        ? "var(--mantine-color-green-filled)"
+                        ? "var(--mantine-color-brown-filled)"
                         : "var(--mantine-color-red-filled)",
                       borderRadius: "100%",
                       width: 48,
@@ -186,7 +186,7 @@ export default function DashboardCard({
                     style={{
                       display: "grid",
                       placeItems: "center",
-                      background: "var(--mantine-color-green-filled)",
+                      background: "var(--mantine-color-brown-filled)",
                       borderRadius: "100%",
                       width: 48,
                       height: 48,
@@ -228,7 +228,7 @@ export default function DashboardCard({
                         display: "grid",
                         placeItems: "center",
                         backgroundColor: hasVoted
-                          ? "var(--mantine-color-green-filled)"
+                          ? "var(--mantine-color-brown-filled)"
                           : "var(--mantine-color-red-filled)",
                         borderRadius: "100%",
                         width: 48,
