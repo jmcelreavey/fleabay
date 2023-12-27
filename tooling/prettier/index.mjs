@@ -1,4 +1,3 @@
-import { fileURLToPath } from "url";
 
 /** @typedef  {import("prettier").Config} PrettierConfig */
 /** @typedef  {import("@ianvs/prettier-plugin-sort-imports").PluginConfig} SortImportsConfig */
@@ -12,7 +11,7 @@ const config = {
     "^(expo(.*)$)|^(expo$)",
     "<THIRD_PARTY_MODULES>",
     "",
-    "^@eboto/(.*)$",
+    "^@fleabay/(.*)$",
     "",
     "^~/",
     "^[../]",

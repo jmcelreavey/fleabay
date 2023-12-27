@@ -1,8 +1,10 @@
 {
-  "name": "@eboto/db",
+  "name": "@fleabay/db",
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
+    "dev": "pnpm db:start --filter @fleabay/db --parallel",
+    "db:start": "docker compose up -d && tsx ./docker-await-mysql.ts",
     "db:push": "pnpm with-env drizzle-kit push:mysql -- --verbose",
     "db:studio": "pnpm with-env drizzle-kit studio --verbose",
     "db:generate": "pnpm with-env drizzle-kit generate:mysql",
@@ -18,19 +20,20 @@
     "uploadthing": "^6.1.0"
   },
   "devDependencies": {
-    "@eboto/eslint-config": "workspace:*",
-    "@eboto/prettier-config": "workspace:*",
-    "@eboto/tsconfig": "workspace:*",
+    "@fleabay/eslint-config": "workspace:*",
+    "@fleabay/prettier-config": "workspace:*",
+    "@fleabay/tsconfig": "workspace:*",
     "@types/node": "^20.10.5",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "0.20.7",
+    "tsx": "^4.6.2",
     "typescript": "^5.3.3"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@eboto/eslint-config/base"
+      "@fleabay/eslint-config/base"
     ]
   },
-  "prettier": "@eboto/prettier-config"
+  "prettier": "@fleabay/prettier-config"
 }

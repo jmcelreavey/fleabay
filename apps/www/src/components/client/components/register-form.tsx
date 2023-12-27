@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { Anchor, Button, Paper, Stack, Text } from "@mantine/core";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
 import Balancer from "react-wrap-balancer";
 
 export default function RegisterForm() {
@@ -46,7 +46,7 @@ export default function RegisterForm() {
         <Stack gap="xs">
           <Text ta="center">
             <Balancer ratio={0.4} preferNative={false}>
-              Welcome to eBoto, register with
+              Welcome to fleabay, register with
             </Balancer>
           </Text>
           <Button
@@ -93,7 +93,7 @@ export default function RegisterForm() {
           <TextInput
             required
             label="Email"
-            placeholder="brice@eboto.com"
+            placeholder="brice@fleabay.com"
             disabled
           />
           <Button disabled>Send magic link (soon)</Button>

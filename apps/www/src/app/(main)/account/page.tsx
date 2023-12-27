@@ -1,7 +1,7 @@
-import { notFound } from "next/navigation";
 import AccountPageClient from "@/components/client/pages/account";
+import { notFound } from "next/navigation";
 
-import { auth } from "@eboto/auth";
+import { auth } from "@fleabay/auth";
 
 export default async function AccountPage() {
   const session = await auth();

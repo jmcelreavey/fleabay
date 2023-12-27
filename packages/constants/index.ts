@@ -1,3 +1,4 @@
+import type { TablerIconsProps } from "@tabler/icons-react";
 import {
   IconFlag,
   IconLayoutDashboard,
@@ -6,14 +7,13 @@ import {
   IconUsers,
   IconUserSearch,
 } from "@tabler/icons-react";
-import type { TablerIconsProps } from "@tabler/icons-react";
 import { z } from "zod";
 
-import type { Election } from "@eboto/db/schema";
+import type { Election } from "@fleabay/db/schema";
 
 export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://www.eboto-mo.com"
+    ? "https://www.fleabay.northern.ie"
     : "http://localhost:3000";
 
 export const PRICING = [
@@ -332,16 +332,16 @@ export const takenSlugs: TakenSlugs = [
 
 export const FAQs: { id: string; question: string; answer: string }[] = [
   {
-    id: "how-safe-is-eboto",
-    question: "How safe is eBoto?",
+    id: "how-safe-is-fleabay",
+    question: "How safe is fleabay?",
     answer:
-      "eBoto is an open-source software, which means that the source code is available to the public for review and improvement. Open-source software is generally considered safe because it allows for greater transparency and accountability in the development process.",
+      "fleabay is an open-source software, which means that the source code is available to the public for review and improvement. Open-source software is generally considered safe because it allows for greater transparency and accountability in the development process.",
   },
   {
-    id: "does-eboto-offer-real-time-vote-count",
-    question: "Does eBoto offer real-time vote count?",
+    id: "does-fleabay-offer-real-time-vote-count",
+    question: "Does fleabay offer real-time vote count?",
     answer:
-      "Yes, eBoto provides a real-time vote count feature. However, during an ongoing election, the candidate's name in the real-time vote count page will not be revealed until the election has ended.",
+      "Yes, fleabay provides a real-time vote count feature. However, during an ongoing election, the candidate's name in the real-time vote count page will not be revealed until the election has ended.",
   },
   {
     id: "can-i-have-a-position-with-multiple-selections-such-as-senators",
@@ -354,7 +354,7 @@ export const FAQs: { id: string; question: string; answer: string }[] = [
     id: "can-i-view-the-elections-real-time-vote-count-even-if-im-not-a-voter",
     question:
       "Can I view the election's real-time vote count even if I'm not a voter?",
-    answer: `It depends on the election's publicity settings. eBoto offers three types of publicity settings: "Private" where only the election commissioner can see the election; "Voter" where the election is visible to both the commissioner and voters; and "Public" where the election's information and real-time vote count are publicly available.`,
+    answer: `It depends on the election's publicity settings. fleabay offers three types of publicity settings: "Private" where only the election commissioner can see the election; "Voter" where the election is visible to both the commissioner and voters; and "Public" where the election's information and real-time vote count are publicly available.`,
   },
   {
     id: "can-an-election-commissioner-vote-in-their-own-election",
@@ -375,16 +375,17 @@ export const FAQs: { id: string; question: string; answer: string }[] = [
       "Yes, as an election commissioner and voter, you can participate in multiple ongoing elections without the need to create another account.",
   },
   {
-    id: "is-eboto-only-available-at-cavite-state-university",
-    question: "Is eBoto only available at Cavite State University?",
+    id: "is-fleabay-only-available-at-cavite-state-university",
+    question: "Is fleabay only available at Cavite State University?",
     answer:
-      "No, eBoto is available for any type of organization that requires secure and flexible online voting.",
+      "No, fleabay is available for any type of organization that requires secure and flexible online voting.",
   },
   {
-    id: "can-i-use-eboto-for-supreme-student-government-ssg-elections",
-    question: "Can I use eBoto for Supreme Student Government (SSG) Elections?",
+    id: "can-i-use-fleabay-for-supreme-student-government-ssg-elections",
+    question:
+      "Can I use fleabay for Supreme Student Government (SSG) Elections?",
     answer:
-      "Yes, eBoto offers a template for SSG Elections, and you can customize it further in the dashboard page to suit your specific requirements.",
+      "Yes, fleabay offers a template for SSG Elections, and you can customize it further in the dashboard page to suit your specific requirements.",
   },
   // {
   //   id: "",

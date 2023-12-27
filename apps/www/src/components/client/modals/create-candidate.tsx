@@ -26,10 +26,10 @@ import {
   TextInput,
   UnstyledButton,
 } from "@mantine/core";
-import { YearPickerInput } from "@mantine/dates";
 import type { DateValue } from "@mantine/dates";
-import { Dropzone, DropzoneReject, IMAGE_MIME_TYPE } from "@mantine/dropzone";
+import { YearPickerInput } from "@mantine/dates";
 import type { FileWithPath } from "@mantine/dropzone";
+import { Dropzone, DropzoneReject, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { hasLength, useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -46,7 +46,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 
-import type { Position } from "@eboto/db/schema";
+import type { Position } from "@fleabay/db/schema";
 
 export default function CreateCandidate({ position }: { position: Position }) {
   const context = api.useUtils();
@@ -292,8 +292,9 @@ export default function CreateCandidate({ position }: { position: Position }) {
                       <Text size="xs">
                         This will be used as the candidate&apos;s URL.
                         <br />
-                        eboto-mo.com/{params?.electionDashboardSlug?.toString()}
-                        /{form.values.slug || "candidate-slug"}
+                        fleabay.northern.ie/
+                        {params?.electionDashboardSlug?.toString()}/
+                        {form.values.slug || "candidate-slug"}
                       </Text>
                     }
                     required

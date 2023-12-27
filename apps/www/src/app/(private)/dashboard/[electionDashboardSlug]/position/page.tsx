@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import DashboardPosition from "@/components/client/pages/dashboard-position";
 import { api } from "@/trpc/server";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { db } from "@eboto/db";
+import { db } from "@fleabay/db";
 
 export const metadata: Metadata = {
   title: "Positions",

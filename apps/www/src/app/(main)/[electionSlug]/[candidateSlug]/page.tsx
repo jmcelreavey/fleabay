@@ -4,8 +4,8 @@ import ElectionCandidate from "@/components/client/pages/election-candidate";
 import { api } from "@/trpc/server";
 import { env } from "env.mjs";
 
-import { auth } from "@eboto/auth";
-import { db } from "@eboto/db";
+import { auth } from "@fleabay/auth";
+import { db } from "@fleabay/db";
 
 export async function generateMetadata({
   params: { electionSlug, candidateSlug },
@@ -65,15 +65,15 @@ export async function generateMetadata({
     title: `${`${candidate.last_name}, ${candidate.first_name}${
       candidate.middle_name ? " " + candidate.middle_name : ""
     }`} – ${election.name}`,
-    description: `See information about ${candidate.first_name} ${candidate.last_name} | eBoto`,
+    description: `See information about ${candidate.first_name} ${candidate.last_name} | fleabay`,
     openGraph: {
       title: election.name,
-      description: `See information about ${candidate.first_name} ${candidate.last_name} | eBoto`,
+      description: `See information about ${candidate.first_name} ${candidate.last_name} | fleabay`,
       images: [
         {
           url: `${
             env.NODE_ENV === "production"
-              ? "https://eboto-mo.com"
+              ? "https://fleabay.northern.ie"
               : "http://localhost:3000"
           }/api/og?type=candidate&candidate_name=${encodeURIComponent(
             candidate.first_name,

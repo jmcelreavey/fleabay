@@ -1,10 +1,10 @@
+import { verifySignatureAppRouter } from "@upstash/qstash/dist/nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { verifySignatureAppRouter } from "@upstash/qstash/dist/nextjs";
 
-import { db } from "@eboto/db";
-import { elections } from "@eboto/db/schema";
-import { sendElectionStart } from "@eboto/email/emails/election-start";
+import { db } from "@fleabay/db";
+import { elections } from "@fleabay/db/schema";
+import { sendElectionStart } from "@fleabay/email/emails/election-start";
 
 // export const runtime = "edge";
 

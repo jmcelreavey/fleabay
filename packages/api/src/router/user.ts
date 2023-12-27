@@ -1,14 +1,14 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { update } from "@eboto/auth";
-import { eq } from "@eboto/db";
+import { update } from "@fleabay/auth";
+import { eq } from "@fleabay/db";
 import {
-  accounts,
-  deleted_accounts,
-  deleted_users,
-  users,
-} from "@eboto/db/schema";
+    accounts,
+    deleted_accounts,
+    deleted_users,
+    users,
+} from "@fleabay/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 

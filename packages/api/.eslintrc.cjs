@@ -1,7 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
 const config = {
   root: true,
-  extends: ["@eboto/eslint-config/base"],
+  extends: ["@fleabay/eslint-config/base"],
 };
 
 module.exports = config;

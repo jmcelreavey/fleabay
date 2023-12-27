@@ -1,11 +1,11 @@
+import { verifySignatureAppRouter } from "@upstash/qstash/dist/nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { verifySignatureAppRouter } from "@upstash/qstash/dist/nextjs";
 
-import { db } from "@eboto/db";
-import type { GeneratedElectionResult } from "@eboto/db/schema";
-import { generated_election_results } from "@eboto/db/schema";
-import { sendElectionResult } from "@eboto/email/emails/election-result";
+import { db } from "@fleabay/db";
+import type { GeneratedElectionResult } from "@fleabay/db/schema";
+import { generated_election_results } from "@fleabay/db/schema";
+import { sendElectionResult } from "@fleabay/email/emails/election-result";
 
 // export const runtime = "edge";
 

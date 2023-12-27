@@ -1,7 +1,7 @@
-import { redirect } from "next/navigation";
 import { Container } from "@mantine/core";
+import { redirect } from "next/navigation";
 
-import { auth } from "@eboto/auth";
+import { auth } from "@fleabay/auth";
 
 export default async function AuthLayout(props: React.PropsWithChildren) {
   const session = await auth();

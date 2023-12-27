@@ -2,13 +2,11 @@
 
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["@eboto/db", "@eboto/auth", "@eboto/api"],
+  transpilePackages: ["@fleabay/db", "fleabayto/auth", "@fleabay/api"],
   experimental: {
     webpackBuildWorker: true,
-    // swcPlugins: [["next-superjson-plugin", {}]],
   },
   images: {
-    // unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

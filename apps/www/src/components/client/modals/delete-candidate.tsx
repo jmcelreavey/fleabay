@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
 import { api } from "@/trpc/client";
 import { Alert, Button, Group, Modal, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
+import { useEffect } from "react";
 
-import type { Candidate } from "@eboto/db/schema";
+import type { Candidate } from "@fleabay/db/schema";
 
 export default function DeleteCandidate({
   candidate,

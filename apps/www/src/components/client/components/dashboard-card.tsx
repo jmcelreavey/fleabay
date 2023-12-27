@@ -1,32 +1,32 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import classes from "@/styles/Dashboard.module.css";
 import {
-  ActionIcon,
-  Box,
-  Center,
-  Flex,
-  HoverCard,
-  HoverCardDropdown,
-  HoverCardTarget,
-  Text,
-  UnstyledButton,
+    ActionIcon,
+    Box,
+    Center,
+    Flex,
+    HoverCard,
+    HoverCardDropdown,
+    HoverCardTarget,
+    Text,
+    UnstyledButton,
 } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import {
-  IconCheck,
-  IconExternalLink,
-  IconLock,
-  IconUsersGroup,
-  IconWorldWww,
-  IconX,
+    IconCheck,
+    IconExternalLink,
+    IconLock,
+    IconUsersGroup,
+    IconWorldWww,
+    IconX,
 } from "@tabler/icons-react";
 import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
 
-import { parseHourTo12HourFormat } from "@eboto/constants";
-import type { Election } from "@eboto/db/schema";
+import { parseHourTo12HourFormat } from "@fleabay/constants";
+import type { Election } from "@fleabay/db/schema";
 
 export default function DashboardCard({
   election,

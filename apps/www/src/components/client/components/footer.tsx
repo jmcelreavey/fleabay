@@ -1,24 +1,24 @@
 "use client";
 
+import {
+    ActionIcon,
+    Anchor,
+    Container,
+    Group,
+    Menu,
+    MenuTarget,
+    Text,
+    UnstyledButton,
+} from "@mantine/core";
+import {
+    IconBrandFacebook,
+    IconBrandGithub,
+    IconBrandTwitter,
+    IconBrandYoutube,
+} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import {
-  ActionIcon,
-  Anchor,
-  Container,
-  Group,
-  Menu,
-  MenuTarget,
-  Text,
-  UnstyledButton,
-} from "@mantine/core";
-import {
-  IconBrandFacebook,
-  IconBrandGithub,
-  IconBrandTwitter,
-  IconBrandYoutube,
-} from "@tabler/icons-react";
 
 export default function Footer() {
   const params = useParams();
@@ -28,13 +28,13 @@ export default function Footer() {
         <UnstyledButton component={Link} href="/">
           <Group gap={4}>
             <Image
-              src="/images/logo.png"
-              alt="eBoto Logo"
+              src="/images/logo.svg"
+              alt="fleabay Logo"
               width={32}
               height={32}
               priority
             />
-            <Text fw={600}>eBoto</Text>
+            <Text fw={600}>FleaBay</Text>
           </Group>
         </UnstyledButton>
 
@@ -42,7 +42,7 @@ export default function Footer() {
           <ActionIcon
             variant="subtle"
             component={Link}
-            href="https://www.facebook.com/cvsueboto/"
+            href="https://www.facebook.com/cvsufleabay/"
             target="_blank"
             size="lg"
           >
@@ -51,7 +51,7 @@ export default function Footer() {
           <ActionIcon
             variant="subtle"
             component={Link}
-            href="https://twitter.com/cvsueboto"
+            href="https://twitter.com/cvsufleabay"
             target="_blank"
             size="lg"
             visibleFrom="xs"
@@ -70,7 +70,7 @@ export default function Footer() {
           <ActionIcon
             variant="subtle"
             component={Link}
-            href="https://github.com/bricesuazo/eboto-mo"
+            href="https://github.com/bricesuazo/fleabay-mo"
             target="_blank"
             size="lg"
             visibleFrom="sm"

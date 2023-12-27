@@ -16,8 +16,8 @@ export const env = createEnv({
   server: {
     DATABASE_URL: z.string().min(1),
     NODE_ENV: z.enum(["development", "test", "production"]),
-    QSTASH_CURRENT_SIGNING_KEY: z.string().min(1),
-    QSTASH_NEXT_SIGNING_KEY: z.string().min(1),
+    QSTASH_CURRENT_SIGNING_KEY: z.string().optional(),
+    QSTASH_NEXT_SIGNING_KEY: z.string().optional(),
     UPLOADTHING_SECRET: z.string().min(1),
   },
 

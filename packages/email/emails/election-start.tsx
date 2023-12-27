@@ -1,21 +1,21 @@
 import {
-  Body,
-  Button,
-  Container,
-  Head,
-  Heading,
-  Hr,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Section,
-  Tailwind,
-  Text,
+    Body,
+    Button,
+    Container,
+    Head,
+    Heading,
+    Hr,
+    Html,
+    Img,
+    Link,
+    Preview,
+    Section,
+    Tailwind,
+    Text,
 } from "@react-email/components";
 import { renderAsync } from "@react-email/render";
 
-import { baseUrl } from "@eboto/constants";
+import { baseUrl } from "@fleabay/constants";
 
 import { ses } from "../index";
 import { config } from "../tailwind.config";
@@ -41,7 +41,7 @@ export async function sendElectionStart(props: ElectionStartProps) {
     Message: {
       Subject: {
         Charset: "UTF-8",
-        Data: `eBoto: Election has started for ${props.election.name}`,
+        Data: `fleabay: Election has started for ${props.election.name}`,
       },
       Body: {
         Html: {
@@ -57,15 +57,15 @@ export default function ElectionStart(props: ElectionStartProps) {
   return (
     <Html>
       <Head />
-      <Preview>eBoto: Election Result for {props.election.name}</Preview>
+      <Preview>fleabay: Election Result for {props.election.name}</Preview>
       <Tailwind config={config}>
         <Body className="bg-white font-sans">
           <Container className="mx-auto px-12 pt-5">
             <Img
-              src={`https://raw.githubusercontent.com/bricesuazo/eboto/main/apps/www/public/images/logo.png`}
+              src={`https://raw.githubusercontent.com/bricesuazo/fleabay/main/apps/www/public/images/logo.svg`}
               width="42"
               height="42"
-              alt="eBoto"
+              alt="fleabay"
               className="aspect-square rounded-full"
             />
             <Heading as="h1" className="text-2xl font-bold text-gray-800">
@@ -117,7 +117,7 @@ export default function ElectionStart(props: ElectionStartProps) {
                 color: "#b4becc",
               }}
             >
-              eBoto
+              fleabay
             </Link>
           </Container>
         </Body>

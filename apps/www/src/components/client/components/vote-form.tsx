@@ -1,45 +1,45 @@
 "use client";
 
-import { useRef } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useConfetti } from "@/components/providers";
 import { api } from "@/trpc/client";
 import toWords from "@/utils/toWords";
 import {
-  Alert,
-  Box,
-  Button,
-  Center,
-  Checkbox,
-  CheckboxGroup,
-  Group,
-  Modal,
-  Radio,
-  RadioGroup,
-  Stack,
-  Text,
-  UnstyledButton,
-  useMantineColorScheme,
+    Alert,
+    Box,
+    Button,
+    Center,
+    Checkbox,
+    CheckboxGroup,
+    Group,
+    Modal,
+    Radio,
+    RadioGroup,
+    Stack,
+    Text,
+    UnstyledButton,
+    useMantineColorScheme,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
-  IconAlertCircle,
-  IconCheck,
-  IconFingerprint,
-  IconUser,
-  IconUserQuestion,
-  IconX,
+    IconAlertCircle,
+    IconCheck,
+    IconFingerprint,
+    IconUser,
+    IconUserQuestion,
+    IconX,
 } from "@tabler/icons-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 import type {
-  Candidate,
-  Election,
-  Partylist,
-  Position,
-} from "@eboto/db/schema";
+    Candidate,
+    Election,
+    Partylist,
+    Position,
+} from "@fleabay/db/schema";
 
 export default function VoteForm({
   positions,

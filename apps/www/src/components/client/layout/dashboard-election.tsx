@@ -1,99 +1,99 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
 import Footer from "@/components/client/components/footer";
 import Header from "@/components/client/components/header";
 import CreateElection from "@/components/client/modals/create-election";
 import { useStore } from "@/store";
 import { api } from "@/trpc/client";
 import {
-  ActionIcon,
-  Alert,
-  AppShell,
-  AppShellAside,
-  AppShellFooter,
-  AppShellHeader,
-  AppShellMain,
-  AppShellNavbar,
-  Badge,
-  Box,
-  Button,
-  Card,
-  Center,
-  CheckIcon,
-  Combobox,
-  ComboboxChevron,
-  ComboboxDropdown,
-  ComboboxGroup,
-  ComboboxOption,
-  ComboboxOptions,
-  ComboboxTarget,
-  Divider,
-  Flex,
-  Group,
-  HoverCard,
-  HoverCardDropdown,
-  HoverCardTarget,
-  InputBase,
-  InputPlaceholder,
-  Loader,
-  Modal,
-  Popover,
-  PopoverDropdown,
-  PopoverTarget,
-  ScrollArea,
-  ScrollAreaAutosize,
-  Skeleton,
-  Stack,
-  Tabs,
-  TabsList,
-  TabsPanel,
-  TabsTab,
-  Text,
-  Textarea,
-  TextInput,
-  ThemeIcon,
-  Tooltip,
-  TooltipGroup,
-  UnstyledButton,
-  useCombobox,
+    ActionIcon,
+    Alert,
+    AppShell,
+    AppShellAside,
+    AppShellFooter,
+    AppShellHeader,
+    AppShellMain,
+    AppShellNavbar,
+    Badge,
+    Box,
+    Button,
+    Card,
+    Center,
+    CheckIcon,
+    Combobox,
+    ComboboxChevron,
+    ComboboxDropdown,
+    ComboboxGroup,
+    ComboboxOption,
+    ComboboxOptions,
+    ComboboxTarget,
+    Divider,
+    Flex,
+    Group,
+    HoverCard,
+    HoverCardDropdown,
+    HoverCardTarget,
+    InputBase,
+    InputPlaceholder,
+    Loader,
+    Modal,
+    Popover,
+    PopoverDropdown,
+    PopoverTarget,
+    ScrollArea,
+    ScrollAreaAutosize,
+    Skeleton,
+    Stack,
+    Tabs,
+    TabsList,
+    TabsPanel,
+    TabsTab,
+    Text,
+    TextInput,
+    Textarea,
+    ThemeIcon,
+    Tooltip,
+    TooltipGroup,
+    UnstyledButton,
+    useCombobox,
 } from "@mantine/core";
 import { isEmail, useForm } from "@mantine/form";
 import { useDisclosure, useScrollIntoView } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
-  IconAlertCircle,
-  IconAlertTriangle,
-  IconAt,
-  IconCheck,
-  IconChevronLeft,
-  IconExternalLink,
-  IconLogout,
-  IconMessage2Question,
-  IconMessage2X,
-  IconPlus,
-  IconSend,
-  IconUserMinus,
-  IconUserPlus,
+    IconAlertCircle,
+    IconAlertTriangle,
+    IconAt,
+    IconCheck,
+    IconChevronLeft,
+    IconExternalLink,
+    IconLogout,
+    IconMessage2Question,
+    IconMessage2X,
+    IconPlus,
+    IconSend,
+    IconUserMinus,
+    IconUserPlus,
 } from "@tabler/icons-react";
 import { zodResolver } from "mantine-form-zod-resolver";
 import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
+import {
+    useParams,
+    usePathname,
+    useRouter,
+    useSearchParams,
+} from "next/navigation";
+import { useEffect, useState } from "react";
 import Balancer from "react-wrap-balancer";
 import { z } from "zod";
 
 import {
-  electionDashboardNavbar,
-  isElectionEnded,
-  isElectionOngoing,
-} from "@eboto/constants";
+    electionDashboardNavbar,
+    isElectionEnded,
+    isElectionOngoing,
+} from "@fleabay/constants";
 
 export interface ChatType {
   type: "admin" | "voters";

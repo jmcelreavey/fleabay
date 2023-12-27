@@ -1,5 +1,5 @@
 {
-  "extends": "@eboto0-mo/tsconfig/base.json",
+  "extends": "@fleabay0-mo/tsconfig/base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },

@@ -2,15 +2,15 @@ import { TRPCError } from "@trpc/server";
 import { nanoid } from "nanoid";
 import { z } from "zod";
 
-import { and, eq } from "@eboto/db";
+import { and, eq } from "@fleabay/db";
 import {
-  achievements,
-  affiliations,
-  candidates,
-  credentials,
-  events_attended,
-  platforms,
-} from "@eboto/db/schema";
+    achievements,
+    affiliations,
+    candidates,
+    credentials,
+    events_attended,
+    platforms,
+} from "@fleabay/db/schema";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 

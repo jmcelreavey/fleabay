@@ -1,5 +1,5 @@
 {
-  "name": "@eboto/tsconfig",
+  "name": "@fleabay/tsconfig",
   "publishConfig": {
     "access": "public"
   }

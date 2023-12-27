@@ -6,7 +6,7 @@ import {
   View,
 } from "@react-pdf/renderer";
 
-import type { GeneratedElectionResult } from "@eboto/db/schema";
+import type { GeneratedElectionResult } from "@fleabay/db/schema";
 
 export default function GenerateResult({
   result,
@@ -59,7 +59,7 @@ export default function GenerateResult({
         >
           <View style={{ display: "flex", alignItems: "center" }}>
             <PdfImage
-              src="https://raw.githubusercontent.com/bricesuazo/eboto/main/apps/www/public/images/logo.png"
+              src="https://raw.githubusercontent.com/bricesuazo/fleabay/main/apps/www/public/images/logo.svg"
               style={{
                 width: 32,
                 height: 32,
@@ -74,7 +74,7 @@ export default function GenerateResult({
                 color: "#2f9e44",
               }}
             >
-              eBoto
+              fleabay
             </Text>
           </View>
         </View>
@@ -107,7 +107,7 @@ export default function GenerateResult({
             >
               {result.name}
             </Text>
-            <Text>https://eboto-mo.com/{result.slug}</Text>
+            <Text>https://fleabay.northern.ie/{result.slug}</Text>
             <Text>
               {new Date(result.start_date).toLocaleString("en-US", dateConfig)}
               {" - "}

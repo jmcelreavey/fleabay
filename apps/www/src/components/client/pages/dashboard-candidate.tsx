@@ -1,30 +1,30 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
 import CreateCandidate from "@/components/client/modals/create-candidate";
 import DeleteCandidate from "@/components/client/modals/delete-candidate";
 import EditCandidate from "@/components/client/modals/edit-candidate";
 import classes from "@/styles/Candidate.module.css";
 import { api } from "@/trpc/client";
 import {
-  Anchor,
-  Box,
-  Flex,
-  Group,
-  HoverCard,
-  HoverCardDropdown,
-  HoverCardTarget,
-  ScrollArea,
-  Stack,
-  Text,
+    Anchor,
+    Box,
+    Flex,
+    Group,
+    HoverCard,
+    HoverCardDropdown,
+    HoverCardTarget,
+    ScrollArea,
+    Stack,
+    Text,
 } from "@mantine/core";
 import { IconUser } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import Balancer from "react-wrap-balancer";
 
-import type { RouterOutputs } from "@eboto/api";
-import type { Election } from "@eboto/db/schema";
+import type { RouterOutputs } from "@fleabay/api";
+import type { Election } from "@fleabay/db/schema";
 
 export default function DashboardCandidate({
   election,

@@ -12,6 +12,7 @@
       "persistent": true
     },
     "start": {},
+    "db:start": {},
     "db:push": {},
     "db:studio": {},
     "db:generate": {},
@@ -43,7 +44,6 @@
     "SMTP_PASSWORD",
     "SMTP_HOST",
     "SMTP_PORT",
-    "EMAIL_FROM",
-    "DISCORD_WEBHOOK_URL"
+    "EMAIL_FROM"
   ]
 }

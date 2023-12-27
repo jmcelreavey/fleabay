@@ -1,26 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
 import { api } from "@/trpc/client";
 import {
-  Alert,
-  Button,
-  Group,
-  Modal,
-  Stack,
-  Text,
-  TextInput,
+    Alert,
+    Button,
+    Group,
+    Modal,
+    Stack,
+    Text,
+    TextInput,
 } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
-  IconAlertCircle,
-  IconCheck,
-  IconLetterCase,
+    IconAlertCircle,
+    IconCheck,
+    IconLetterCase,
 } from "@tabler/icons-react";
+import { useEffect } from "react";
 
-import type { Partylist } from "@eboto/db/schema";
+import type { Partylist } from "@fleabay/db/schema";
 
 export default function EditPartylist({ partylist }: { partylist: Partylist }) {
   const [opened, { open, close }] = useDisclosure(false);

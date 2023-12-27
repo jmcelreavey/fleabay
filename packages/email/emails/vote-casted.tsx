@@ -1,22 +1,22 @@
 import {
-  Body,
-  Button,
-  Container,
-  Head,
-  Heading,
-  Hr,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Row,
-  Section,
-  Tailwind,
-  Text,
+    Body,
+    Button,
+    Container,
+    Head,
+    Heading,
+    Hr,
+    Html,
+    Img,
+    Link,
+    Preview,
+    Row,
+    Section,
+    Tailwind,
+    Text,
 } from "@react-email/components";
 import { renderAsync } from "@react-email/render";
 
-import { baseUrl } from "@eboto/constants";
+import { baseUrl } from "@fleabay/constants";
 
 import { ses } from "../index";
 import { config } from "../tailwind.config";
@@ -89,10 +89,10 @@ export default function VoteCasted(props: VoteCastedProps) {
             }}
           >
             <Img
-              src={`https://raw.githubusercontent.com/bricesuazo/eboto/main/apps/www/public/images/logo.png`}
+              src={`https://raw.githubusercontent.com/bricesuazo/fleabay/main/apps/www/public/images/logo.svg`}
               width="42"
               height="42"
-              alt="eBoto"
+              alt="fleabay"
               style={{
                 borderRadius: 21,
                 width: 42,
@@ -175,7 +175,7 @@ export default function VoteCasted(props: VoteCastedProps) {
                 color: "#b4becc",
               }}
             >
-              eBoto
+              fleabay
             </Link>
           </Container>
         </Body>

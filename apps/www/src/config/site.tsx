@@ -6,15 +6,10 @@ import {
 } from "@tabler/icons-react";
 
 export const siteConfig = {
-  name: "eBoto – Your One-Stop Online Voting Solution",
+  name: "FleaBay - Your One-Stop Online Voting Solution",
   description:
-    "Empower your elections with eBoto, the versatile and web-based voting platform that offers secure online elections for any type of organization.",
-  url: "https://www.eboto-mo.com",
-  ogImage: "https://www.eboto-mo.com/og.jpg",
-  links: {
-    twitter: "https://twitter.com/brice_suazo",
-    github: "https://github.com/bricesuazo/eboto-mo",
-  },
+    "Empower your elections with fleabay, the versatile and web-based voting platform that offers secure online elections for any type of organization.",
+  url: "https://fleabay.northern.ie",
 };
 
 export type SiteConfig = typeof siteConfig;

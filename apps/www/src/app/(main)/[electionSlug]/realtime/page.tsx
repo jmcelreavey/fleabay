@@ -4,9 +4,9 @@ import Realtime from "@/components/client/pages/realtime";
 import { api } from "@/trpc/server";
 import moment from "moment";
 
-import { auth } from "@eboto/auth";
-import { isElectionEnded, isElectionOngoing } from "@eboto/constants";
-import { db } from "@eboto/db";
+import { auth } from "@fleabay/auth";
+import { isElectionEnded, isElectionOngoing } from "@fleabay/constants";
+import { db } from "@fleabay/db";
 
 export async function generateMetadata({
   params: { electionSlug },
@@ -46,15 +46,15 @@ export async function generateMetadata({
 
   return {
     title: election.name + " - Realtime Result",
-    description: `See realtime result of ${election.name} | eBoto`,
+    description: `See realtime result of ${election.name} | fleabay`,
     openGraph: {
       title: election.name,
-      description: `See realtime result of ${election.name} | eBoto`,
+      description: `See realtime result of ${election.name} | fleabay`,
       images: [
         {
           url: `${
             process.env.NODE_ENV === "production"
-              ? "https://eboto-mo.com"
+              ? "https://fleabay.northern.ie"
               : "http://localhost:3000"
           }/api/og?type=election&election_name=${encodeURIComponent(
             election.name,
@@ -108,7 +108,7 @@ export default async function RealtimePage({
 
   let isVoterCanMessage = !!isVoter && !isCommissioner;
 
-  const callbackUrl = `/sign-in?callbackUrl=https://eboto-mo.com/${election.slug}/realtime`;
+  const callbackUrl = `/sign-in?callbackUrl=https://fleabay.northern.ie/${election.slug}/realtime`;
 
   if (election.publicity === "PRIVATE") {
     isVoterCanMessage = false;

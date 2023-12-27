@@ -1,27 +1,27 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  List,
-  ListItem,
-  Modal,
-  NumberFormatter,
-  rem,
-  Slider,
-  Stack,
-  Text,
-  ThemeIcon,
-  Title,
+    Box,
+    Button,
+    Center,
+    Flex,
+    List,
+    ListItem,
+    Modal,
+    NumberFormatter,
+    rem,
+    Slider,
+    Stack,
+    Text,
+    ThemeIcon,
+    Title,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconCircleCheck, IconRocket } from "@tabler/icons-react";
+import Link from "next/link";
+import { useState } from "react";
 
-import { PRICING } from "@eboto/constants";
+import { PRICING } from "@fleabay/constants";
 
 export default function BoostCard() {
   const [value, setValue] = useState(0);

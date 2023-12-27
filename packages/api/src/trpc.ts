@@ -3,9 +3,9 @@ import superjson from "superjson";
 import { UTApi } from "uploadthing/server";
 import { ZodError } from "zod";
 
-import { auth } from "@eboto/auth";
-import type { Session } from "@eboto/auth";
-import { db } from "@eboto/db";
+import type { Session } from "@fleabay/auth";
+import { auth } from "@fleabay/auth";
+import { db } from "@fleabay/db";
 
 // import { env } from "./env.mjs";
 

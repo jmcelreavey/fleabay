@@ -1,24 +1,24 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { api } from "@/trpc/client";
 import {
-  Anchor,
-  Box,
-  Breadcrumbs,
-  Container,
-  Flex,
-  List,
-  ListItem,
-  Stack,
-  Text,
-  Title,
+    Anchor,
+    Box,
+    Breadcrumbs,
+    Container,
+    Flex,
+    List,
+    ListItem,
+    Stack,
+    Text,
+    Title,
 } from "@mantine/core";
 import { IconUser } from "@tabler/icons-react";
 import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
 
-import type { RouterOutputs } from "@eboto/api";
+import type { RouterOutputs } from "@fleabay/api";
 
 import MyMessagesElection from "../components/my-messages-election";
 import MessageCommissioner from "../modals/message-commissioner";

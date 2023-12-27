@@ -33,7 +33,7 @@ import {
 import { zodResolver } from "mantine-form-zod-resolver";
 import { z } from "zod";
 
-import { parseHourTo12HourFormat, positionTemplate } from "@eboto/constants";
+import { parseHourTo12HourFormat, positionTemplate } from "@fleabay/constants";
 
 export default function CreateElection({
   style,
@@ -194,7 +194,7 @@ export default function CreateElection({
                 <>
                   This will be used as the URL for your election
                   <br />
-                  eboto-mo.com/{form.values.slug || "election-slug"}
+                  fleabay.northern.ie/{form.values.slug || "election-slug"}
                 </>
               }
               disabled={createElectionMutation.isPending}

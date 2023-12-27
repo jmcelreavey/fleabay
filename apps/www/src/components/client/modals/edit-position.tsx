@@ -1,29 +1,29 @@
 "use client";
 
-import { useEffect } from "react";
 import { api } from "@/trpc/client";
 import {
-  Alert,
-  Button,
-  Checkbox,
-  Flex,
-  Group,
-  Modal,
-  NumberInput,
-  Stack,
-  Text,
-  TextInput,
+    Alert,
+    Button,
+    Checkbox,
+    Flex,
+    Group,
+    Modal,
+    NumberInput,
+    Stack,
+    Text,
+    TextInput,
 } from "@mantine/core";
 import { hasLength, useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
-  IconAlertCircle,
-  IconCheck,
-  IconLetterCase,
+    IconAlertCircle,
+    IconCheck,
+    IconLetterCase,
 } from "@tabler/icons-react";
+import { useEffect } from "react";
 
-import type { Position } from "@eboto/db/schema";
+import type { Position } from "@fleabay/db/schema";
 
 export default function EditPosition({ position }: { position: Position }) {
   const [opened, { open, close }] = useDisclosure(false);

@@ -3,7 +3,7 @@
 import { api } from "@/trpc/client";
 import { Box, Text } from "@mantine/core";
 
-import type { RouterOutputs } from "@eboto/api";
+import type { RouterOutputs } from "@fleabay/api";
 
 import DashboardCard from "./dashboard-card";
 

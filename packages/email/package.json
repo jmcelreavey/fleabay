@@ -1,5 +1,5 @@
 {
-  "name": "@eboto/email",
+  "name": "@fleabay/email",
   "main": "./index.tsx",
   "scripts": {
     "email:dev": "email dev --port 3002",
@@ -7,24 +7,24 @@
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.465.0",
-    "@eboto/constants": "workspace:*",
+    "@fleabay/constants": "workspace:*",
     "@react-email/components": "0.0.12",
     "@react-email/render": "0.0.10",
     "react": "^18.2.0",
     "react-email": "1.10.0"
   },
   "devDependencies": {
-    "@eboto/db": "workspace:*",
-    "@eboto/prettier-config": "workspace:*",
-    "@eboto/tsconfig": "workspace:*",
+    "@fleabay/db": "workspace:*",
+    "@fleabay/prettier-config": "workspace:*",
+    "@fleabay/tsconfig": "workspace:*",
     "@types/node": "^20.10.5",
     "typescript": "^5.3.3"
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@eboto/eslint-config/base"
+      "@fleabay/eslint-config/base"
     ]
   },
-  "prettier": "@eboto/prettier-config"
+  "prettier": "@fleabay/prettier-config"
 }

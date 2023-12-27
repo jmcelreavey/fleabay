@@ -1,29 +1,29 @@
-import { Suspense } from "react";
-import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import {
-  MyElectionsAsCommissioner as MyElectionsAsCommissionerClient,
-  MyElectionsAsVoter as MyElectionsAsVoterClient,
+    MyElectionsAsCommissioner as MyElectionsAsCommissionerClient,
+    MyElectionsAsVoter as MyElectionsAsVoterClient,
 } from "@/components/client/components/my-elections";
 import Dashboard from "@/components/client/layout/dashboard";
 import CreateElection from "@/components/client/modals/create-election";
 import { api } from "@/trpc/server";
 import {
-  Box,
-  Container,
-  Flex,
-  Group,
-  Skeleton,
-  Stack,
-  Text,
-  Title,
+    Box,
+    Container,
+    Flex,
+    Group,
+    Skeleton,
+    Stack,
+    Text,
+    Title,
 } from "@mantine/core";
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
-import { auth } from "@eboto/auth";
+import { auth } from "@fleabay/auth";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "eBoto | Dashboard",
+  description: "fleabay | Dashboard",
 };
 
 export default async function Page() {

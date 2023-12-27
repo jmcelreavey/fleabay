@@ -12,12 +12,12 @@
   },
   "dependencies": {
     "@ctrl/react-adsense": "^1.7.0",
-    "@eboto/api": "workspace:*",
-    "@eboto/auth": "workspace:*",
-    "@eboto/constants": "workspace:*",
-    "@eboto/db": "workspace:*",
-    "@eboto/email": "workspace:*",
-    "@eboto/eslint-config": "workspace:*",
+    "@fleabay/api": "workspace:*",
+    "@fleabay/auth": "workspace:*",
+    "@fleabay/constants": "workspace:*",
+    "@fleabay/db": "workspace:*",
+    "@fleabay/email": "workspace:*",
+    "@fleabay/eslint-config": "workspace:*",
     "@emotion/react": "^11.11.1",
     "@mantine/carousel": "^7.3.2",
     "@mantine/code-highlight": "^7.3.2",
@@ -73,9 +73,9 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@eboto/eslint-config": "workspace:*",
-    "@eboto/prettier-config": "workspace:*",
-    "@eboto/tsconfig": "workspace:*",
+    "@fleabay/eslint-config": "workspace:*",
+    "@fleabay/prettier-config": "workspace:*",
+    "@fleabay/tsconfig": "workspace:*",
     "@tanstack/eslint-plugin-query": "^5.12.1",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.45",
@@ -88,10 +88,10 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@eboto/eslint-config/base",
-      "@eboto/eslint-config/nextjs",
-      "@eboto/eslint-config/react"
+      "@fleabay/eslint-config/base",
+      "@fleabay/eslint-config/nextjs",
+      "@fleabay/eslint-config/react"
     ]
   },
-  "prettier": "@eboto/prettier-config"
+  "prettier": "@fleabay/prettier-config"
 }

@@ -8,6 +8,20 @@
       "when": 1701861817365,
       "tag": "0000_fine_gorgon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1703691227195,
+      "tag": "0001_fair_alex_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1703708595003,
+      "tag": "0002_empty_domino",
+      "breakpoints": true
     }
   ]
 }

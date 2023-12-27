@@ -6,12 +6,9 @@ import { Box, Container, Stack, Text, Title } from "@mantine/core";
 import moment from "moment";
 import Balancer from "react-wrap-balancer";
 
-import { auth } from "@eboto/auth";
-import {
-  isElectionOngoing,
-  parseHourTo12HourFormat,
-} from "@eboto/constants";
-import { db } from "@eboto/db";
+import { auth } from "@fleabay/auth";
+import { isElectionOngoing, parseHourTo12HourFormat } from "@fleabay/constants";
+import { db } from "@fleabay/db";
 
 export async function generateMetadata({
   params: { electionSlug },
@@ -38,7 +35,9 @@ export default async function VotePage({
   const session = await auth();
 
   if (!session)
-    redirect(`/sign-in?callbackUrl=https://eboto-mo.com/${electionSlug}/vote`);
+    redirect(
+      `/sign-in?callbackUrl=https://fleabay.northern.ie/${electionSlug}/vote`,
+    );
 
   const election = await db.query.elections.findFirst({
     where: (election, { eq, and, isNull }) =>

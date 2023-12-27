@@ -1,26 +1,26 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import CreateVoter from "@/components/client/modals/create-voter";
 import UploadBulkVoter from "@/components/client/modals/upload-bulk-voter";
 import { api } from "@/trpc/client";
 import {
-  ActionIcon,
-  Box,
-  Button,
-  Flex,
-  Group,
-  Stack,
-  Text,
-  Tooltip,
+    ActionIcon,
+    Box,
+    Button,
+    Flex,
+    Group,
+    Stack,
+    Text,
+    Tooltip,
 } from "@mantine/core";
 import { IconRefresh } from "@tabler/icons-react";
 import type { MRT_ColumnDef, MRT_RowSelectionState } from "mantine-react-table";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import moment from "moment";
+import { useMemo, useState } from "react";
 
-import type { RouterOutputs } from "@eboto/api";
-import { isElectionEnded, isElectionOngoing } from "@eboto/constants";
+import type { RouterOutputs } from "@fleabay/api";
+import { isElectionEnded, isElectionOngoing } from "@fleabay/constants";
 
 import DeleteBulkVoter from "../modals/delete-bulk-voter";
 import DeleteVoter from "../modals/delete-voter";

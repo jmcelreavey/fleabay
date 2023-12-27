@@ -5,8 +5,8 @@ import { api } from "@/trpc/server";
 import { env } from "env.mjs";
 import moment from "moment";
 
-import { auth } from "@eboto/auth";
-import { db } from "@eboto/db";
+import { auth } from "@fleabay/auth";
+import { db } from "@fleabay/db";
 
 export async function generateMetadata({
   params: { electionSlug },
@@ -46,15 +46,15 @@ export async function generateMetadata({
 
   return {
     title: election.name,
-    description: `See details about ${election.name} | eBoto`,
+    description: `See details about ${election.name} | fleabay`,
     openGraph: {
       title: election.name,
-      description: `See details about ${election.name} | eBoto`,
+      description: `See details about ${election.name} | fleabay`,
       images: [
         {
           url: `${
             env.NODE_ENV === "production"
-              ? "https://eboto-mo.com"
+              ? "https://fleabay.northern.ie"
               : "http://localhost:3000"
           }/api/og?type=election&election_name=${encodeURIComponent(
             election.name,

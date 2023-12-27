@@ -43,7 +43,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 
-import type { Candidate, Election } from "@eboto/db/schema";
+import type { Candidate, Election } from "@fleabay/db/schema";
 
 export default function EditCandidate({
   candidate,
@@ -445,7 +445,7 @@ export default function EditCandidate({
                       <Text size="xs">
                         This will be used as the candidate&apos;s URL.
                         <br />
-                        eboto-mo.com/{election.slug}/
+                        fleabay.northern.ie/{election.slug}/
                         {form.values.new_slug || "candidate-slug"}
                       </Text>
                     }

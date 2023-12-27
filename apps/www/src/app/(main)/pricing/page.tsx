@@ -1,35 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import classes from "@/styles/Pricing.module.css";
 import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  List,
-  ListItem,
-  NumberFormatter,
-  rem,
-  Slider,
-  Stack,
-  Table,
-  TableScrollContainer,
-  TableTbody,
-  TableTd,
-  TableTfoot,
-  TableTh,
-  TableThead,
-  TableTr,
-  Text,
-  ThemeIcon,
-  Title,
+    Box,
+    Button,
+    Container,
+    Flex,
+    List,
+    ListItem,
+    NumberFormatter,
+    rem,
+    Slider,
+    Stack,
+    Table,
+    TableScrollContainer,
+    TableTbody,
+    TableTd,
+    TableTfoot,
+    TableTh,
+    TableThead,
+    TableTr,
+    Text,
+    ThemeIcon,
+    Title,
 } from "@mantine/core";
 import { IconCircleCheck, IconCircleX } from "@tabler/icons-react";
+import Link from "next/link";
+import { useState } from "react";
 import Balancer from "react-wrap-balancer";
 
-import { PRICING } from "@eboto/constants";
+import { PRICING } from "@fleabay/constants";
 
 export const dynamic = "force-static";
 

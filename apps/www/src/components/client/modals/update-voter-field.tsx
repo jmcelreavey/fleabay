@@ -1,30 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
 import { api } from "@/trpc/client";
 import {
-  ActionIcon,
-  Alert,
-  Button,
-  Flex,
-  Group,
-  Modal,
-  Stack,
-  Text,
-  TextInput,
+    ActionIcon,
+    Alert,
+    Button,
+    Flex,
+    Group,
+    Modal,
+    Stack,
+    Text,
+    TextInput,
 } from "@mantine/core";
 import type { UseFormReturnType } from "@mantine/form";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
-  IconAlertCircle,
-  IconCheck,
-  IconTrash,
-  IconUsersGroup,
+    IconAlertCircle,
+    IconCheck,
+    IconTrash,
+    IconUsersGroup,
 } from "@tabler/icons-react";
+import { useEffect } from "react";
 
-import type { Election, VoterField } from "@eboto/db/schema";
+import type { Election, VoterField } from "@fleabay/db/schema";
 
 interface Field {
   id: string;

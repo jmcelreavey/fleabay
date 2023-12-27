@@ -1,22 +1,22 @@
 import {
-  Body,
-  Button,
-  Container,
-  Head,
-  Heading,
-  Hr,
-  Html,
-  Img,
-  Link,
-  Preview,
-  Row,
-  Section,
-  Tailwind,
-  Text,
+    Body,
+    Button,
+    Container,
+    Head,
+    Heading,
+    Hr,
+    Html,
+    Img,
+    Link,
+    Preview,
+    Row,
+    Section,
+    Tailwind,
+    Text,
 } from "@react-email/components";
 import { renderAsync } from "@react-email/render";
 
-import { baseUrl } from "@eboto/constants";
+import { baseUrl } from "@fleabay/constants";
 
 import { ses } from "../index";
 import { config } from "../tailwind.config";
@@ -53,7 +53,7 @@ export async function sendElectionResult(props: ElectionResultProps) {
     Message: {
       Subject: {
         Charset: "UTF-8",
-        Data: `eBoto: Election Result for ${props.election.name}`,
+        Data: `fleabay: Election Result for ${props.election.name}`,
       },
       Body: {
         Html: {
@@ -69,7 +69,7 @@ export default function ElectionResult(props: ElectionResultProps) {
   return (
     <Html>
       <Head />
-      <Preview>eBoto: Election Result for {props.election.name}</Preview>
+      <Preview>fleabay: Election Result for {props.election.name}</Preview>
       <Tailwind config={config}>
         <Body
           className="bg-white"
@@ -87,10 +87,10 @@ export default function ElectionResult(props: ElectionResultProps) {
             }}
           >
             <Img
-              src={`https://raw.githubusercontent.com/bricesuazo/eboto/main/apps/www/public/images/logo.png`}
+              src={`https://raw.githubusercontent.com/bricesuazo/fleabay/main/apps/www/public/images/logo.svg`}
               width="42"
               height="42"
-              alt="eBoto"
+              alt="fleabay"
               style={{
                 borderRadius: 21,
                 width: 42,
@@ -173,7 +173,7 @@ export default function ElectionResult(props: ElectionResultProps) {
                 color: "#b4becc",
               }}
             >
-              eBoto
+              fleabay
             </Link>
           </Container>
         </Body>

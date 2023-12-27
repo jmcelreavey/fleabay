@@ -1,25 +1,25 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { api } from "@/trpc/client";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Paper,
-  Skeleton,
-  Stack,
-  Text,
-  Title,
+    Box,
+    Button,
+    Center,
+    Flex,
+    Paper,
+    Skeleton,
+    Stack,
+    Text,
+    Title,
 } from "@mantine/core";
 import { IconArrowRight, IconFlag3 } from "@tabler/icons-react";
 import moment from "moment";
+import Image from "next/image";
+import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
-import { parseHourTo12HourFormat } from "@eboto/constants";
+import { parseHourTo12HourFormat } from "@fleabay/constants";
 
 export default function PublicElections() {
   const getAllPublicElectionsQuery =

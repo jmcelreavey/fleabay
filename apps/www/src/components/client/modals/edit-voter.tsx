@@ -1,28 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
 import { api } from "@/trpc/client";
 import {
-  ActionIcon,
-  Alert,
-  Button,
-  Group,
-  Modal,
-  Stack,
-  Text,
-  TextInput,
+    ActionIcon,
+    Alert,
+    Button,
+    Group,
+    Modal,
+    Stack,
+    Text,
+    TextInput,
 } from "@mantine/core";
 import { isEmail, useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
-  IconAlertCircle,
-  IconAt,
-  IconCheck,
-  IconEdit,
+    IconAlertCircle,
+    IconAt,
+    IconCheck,
+    IconEdit,
 } from "@tabler/icons-react";
+import { useEffect } from "react";
 
-import type { VoterField } from "@eboto/db/schema";
+import type { VoterField } from "@fleabay/db/schema";
 
 export default function EditVoter({
   election_id,

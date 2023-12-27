@@ -1,12 +1,12 @@
-import { notFound } from "next/navigation";
 import {
-  AppShell,
-  AppShellFooter,
-  AppShellHeader,
-  AppShellMain,
+    AppShell,
+    AppShellFooter,
+    AppShellHeader,
+    AppShellMain,
 } from "@mantine/core";
+import { notFound } from "next/navigation";
 
-import { auth } from "@eboto/auth";
+import { auth } from "@fleabay/auth";
 
 import Footer from "../components/footer";
 import Header from "../components/header";

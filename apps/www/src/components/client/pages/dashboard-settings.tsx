@@ -34,14 +34,14 @@ import {
   IconX,
 } from "@tabler/icons-react";
 
-import type { RouterOutputs } from "@eboto/api";
+import type { RouterOutputs } from "@fleabay/api";
 import {
   isElectionEnded,
   isElectionOngoing,
   parseHourTo12HourFormat,
-} from "@eboto/constants";
-import type { Publicity } from "@eboto/db/schema";
-import { publicity } from "@eboto/db/schema";
+} from "@fleabay/constants";
+import type { Publicity } from "@fleabay/db/schema";
+import { publicity } from "@fleabay/db/schema";
 
 export default function DashboardSettings({
   election,
@@ -325,7 +325,7 @@ export default function DashboardSettings({
               <>
                 This will be used as the URL for your election
                 <br />
-                eboto-mo.com/{form.values.newSlug || "election-slug"}
+                fleabay.northern.ie/{form.values.newSlug || "election-slug"}
               </>
             }
             withAsterisk

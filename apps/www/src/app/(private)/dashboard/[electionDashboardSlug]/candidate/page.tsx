@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import DashboardCandidate from "@/components/client/pages/dashboard-candidate";
 import { api } from "@/trpc/server";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
-import { db } from "@eboto/db";
+import { db } from "@fleabay/db";
 
 export const metadata: Metadata = {
   title: "Candidates",

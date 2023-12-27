@@ -1,26 +1,26 @@
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
 import ContactForm from "@/components/client/components/contact-form";
 import PublicElections from "@/components/client/components/public-elections";
 import classes from "@/styles/Home.module.css";
 import {
-  Accordion,
-  AccordionControl,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
-  Container,
-  Flex,
-  SimpleGrid,
-  Stack,
-  Text,
-  Title,
+    Accordion,
+    AccordionControl,
+    AccordionItem,
+    AccordionPanel,
+    Box,
+    Button,
+    Container,
+    Flex,
+    SimpleGrid,
+    Stack,
+    Text,
+    Title,
 } from "@mantine/core";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 
-import { FAQs } from "@eboto/constants";
+import { FAQs } from "@fleabay/constants";
 
 const ReactPlayer = dynamic(
   () => import("@/components/client/components/react-player"),
@@ -59,7 +59,7 @@ export default function HomePage() {
               ta={{ base: "left", sm: "center" }}
             >
               <Balancer>
-                Empower your elections with eBoto, the versatile and web-based
+                Empower your elections with fleabay, the versatile and web-based
                 voting platform that offers secure online elections for any type
                 of organization.
               </Balancer>
@@ -94,7 +94,7 @@ export default function HomePage() {
 
         <Stack gap="xl" id="what">
           <Title order={2} ta="center">
-            <Balancer>Ano ang eBoto? (What is eBoto?)</Balancer>
+            <Balancer>Ano ang fleabay? (What is fleabay?)</Balancer>
           </Title>
 
           <Box className={classes.playerContainer}>

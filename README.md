@@ -1,8 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/bricesuazo/eboto)
-
-# [eBoto](https://www.eboto-mo.com/) - Your One-Stop Online Voting Solution
-
-Empower your elections with eBoto, the versatile and web-based voting platform that offers secure online elections for any type of organization.
+# [FleaBay](https://fleabay.northern.ie/) - Your One-Stop Online Auctioning Solution
 
 - **Monorepo**: [TurboRepo](https://turbo.build/)
 - **Framework**: [Next.js](https://nextjs.org/) + [Typescript](https://www.typescriptlang.org/)
@@ -20,13 +16,11 @@ Empower your elections with eBoto, the versatile and web-based voting platform t
 ### For the [Web](/apps/www) Version
 
 ```bash
-git clone https://github.com/bricesuazo/eboto.git
-cd eboto
 pnpm install
 pnpm run dev
 ```
 
-Create a `.env` file similar to [`.env.example`](https://github.com/bricesuazo/eboto/blob/main/.env.example).
+Create a `.env` file similar to `.env.example`.
 
 ### For the [Mobile](/apps/mobile) Version
 

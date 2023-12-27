@@ -1,8 +1,8 @@
+import classes from "@/styles/NotFound.module.css";
+import { Button, Center, Container, Group, Text, Title } from "@mantine/core";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import classes from "@/styles/NotFound.module.css";
-import { Button, Center, Container, Group, Text, Title } from "@mantine/core";
 import Balancer from "react-wrap-balancer";
 
 export const metadata: Metadata = {
@@ -12,8 +12,8 @@ export default function NotFound() {
   return (
     <Container className={classes.root} size="md">
       <Center mb="xl" style={{ flexDirection: "column" }}>
-        <Image src="/images/logo.png" alt="Logo" width={60} height={60} />
-        <Title>eBoto</Title>
+        <Image src="/images/logo.svg" alt="Logo" width={60} height={60} />
+        <Title>fleabay</Title>
       </Center>
       <div className={classes.label}>404</div>
       <Title className={classes.title}>
