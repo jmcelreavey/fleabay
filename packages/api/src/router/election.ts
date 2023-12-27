@@ -54,8 +54,6 @@ export const electionRouter = createTRPCRouter({
 
       if (!election) throw new TRPCError({ code: "NOT_FOUND" });
 
-      const isOngoing = isElectionOngoing({ election });
-
       const positions = await ctx.db.query.positions.findMany({
         where: (position, { eq, and, isNull }) =>
           and(
@@ -97,7 +95,7 @@ export const electionRouter = createTRPCRouter({
       return {
         election,
         positions,
-        isOngoing,
+        isOngoing: isElectionOngoing({ election, withoutHours: true }),
         myVoterData,
         hasVoted: !!hasVoted,
         isVoterCanMessage:
@@ -393,7 +391,7 @@ export const electionRouter = createTRPCRouter({
           }),
       }));
     }),
-  getAllMyElections: protectedProcedure.query(({ ctx }) => {
+  getAllMyElections: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.query.commissioners
       .findMany({
         where: (commissioners, { eq, isNull, and }) =>
@@ -635,12 +633,7 @@ export const electionRouter = createTRPCRouter({
         }
 
         const isElectionDisabled =
-          !isElectionOngoing({
-            election: isElectionCommissionerExists,
-          }) ||
-          !isElectionEnded({
-            election: isElectionCommissionerExists,
-          });
+          isElectionCommissionerExists.start_date.getTime() < Date.now();
 
         await db
           .update(elections)

@@ -392,12 +392,7 @@ export default function DashboardSettings({
             required
             disabled={
               editElectionMutation.isPending ||
-              isElectionOngoing({
-                election: getElectionBySlugQuery.data,
-              }) ||
-              isElectionEnded({
-                election: getElectionBySlugQuery.data,
-              })
+              getElectionBySlugQuery.data.start_date.getTime() < Date.now()
             }
             {...form.getInputProps("date")}
           />
@@ -427,12 +422,7 @@ export default function DashboardSettings({
               label={parseHourTo12HourFormat}
               disabled={
                 editElectionMutation.isPending ||
-                isElectionOngoing({
-                  election: getElectionBySlugQuery.data,
-                }) ||
-                isElectionEnded({
-                  election: getElectionBySlugQuery.data,
-                })
+                getElectionBySlugQuery.data.start_date.getTime() < Date.now()
               }
               {...form.getInputProps("voting_hours")}
             />

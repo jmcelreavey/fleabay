@@ -60,7 +60,7 @@ export default async function VotePage({
       ),
   });
 
-  if (election.voter_fields.length && !isVoter?.field)
+  if (!isVoter || (election.voter_fields.length && !isVoter?.field))
     redirect(`/${election.slug}`);
 
   const hasVoted = await db.query.votes.findFirst({

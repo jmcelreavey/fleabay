@@ -204,10 +204,9 @@ export default function DashboardVoter({
           >
             <UpdateVoterField
               election={votersQuery.data.election}
-              isDisabled={
-                isElectionOngoing({ election: votersQuery.data.election }) ||
-                isElectionEnded({ election: votersQuery.data.election })
-              }
+              isDisabled={isElectionOngoing({
+                election: votersQuery.data.election,
+              })}
             />
           </Tooltip>
           {votersQuery.data.election.voter_domain && (
