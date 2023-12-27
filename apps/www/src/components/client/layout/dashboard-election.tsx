@@ -89,11 +89,7 @@ import moment from "moment";
 import Balancer from "react-wrap-balancer";
 import { z } from "zod";
 
-import {
-  electionDashboardNavbar,
-  isElectionEnded,
-  isElectionOngoing,
-} from "@eboto/constants";
+import { electionDashboardNavbar, isElectionOngoing } from "@eboto/constants";
 
 export interface ChatType {
   type: "admin" | "voters";
@@ -155,12 +151,11 @@ export default function DashboardElection({
 
   const { data: elections } = api.election.getAllMyElections.useQuery();
 
-  const currentElectionUser = elections
-    ? elections.find(
-        ({ election }) =>
-          election.slug === params?.electionDashboardSlug?.toString(),
-      )
-    : null;
+  const currentElectionUser =
+    elections?.find(
+      ({ election }) =>
+        election.slug === params?.electionDashboardSlug?.toString(),
+    ) ?? null;
 
   const currentElection = currentElectionUser?.election;
 
@@ -317,7 +312,7 @@ export default function DashboardElection({
           },
         }}
         aside={{
-          breakpoint: "md",
+          breakpoint: "lg",
           width: { md: 280, xl: 320 },
           collapsed: {
             desktop: false,
@@ -395,10 +390,8 @@ export default function DashboardElection({
                             {
                               group: "Ongoing",
                               elections: elections
-                                .filter(
-                                  ({ election }) =>
-                                    isElectionOngoing({ election }) &&
-                                    !isElectionEnded({ election }),
+                                .filter(({ election }) =>
+                                  isElectionOngoing({ election }),
                                 )
                                 .sort(
                                   (a, b) =>
@@ -423,8 +416,10 @@ export default function DashboardElection({
                             {
                               group: "Completed",
                               elections: elections
-                                .filter(({ election }) =>
-                                  isElectionEnded({ election }),
+                                .filter(
+                                  ({ election }) =>
+                                    election.end_date.getTime() <
+                                    new Date().getTime(),
                                 )
                                 .sort(
                                   (a, b) =>
