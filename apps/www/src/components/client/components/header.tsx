@@ -182,7 +182,7 @@ export default function Header({ userId }: { userId?: string }) {
           </Stack>
         </form>
       </Modal>
-      <Container h="100%" fluid={!!params?.electionDashboardSlug}>
+      <Container h="100%" size={"90%"}>
         <Flex h="100%" align="center" justify="space-between" gap="xs">
           <Flex h="100%" align="center" gap="xs">
             <UnstyledButton component={Link} href={userId ? "/dashboard" : "/"}>

@@ -3,24 +3,24 @@ import { nanoid } from "nanoid";
 import { z } from "zod";
 
 import {
-    isElectionEnded,
-    isElectionOngoing,
-    positionTemplate,
-    takenSlugs,
+  isElectionEnded,
+  isElectionOngoing,
+  positionTemplate,
+  takenSlugs,
 } from "@fleabay/constants";
 import { and, eq, isNull } from "@fleabay/db";
 import {
-    admin_commissioners_messages,
-    admin_commissioners_rooms,
-    commissioners,
-    commissioners_voters_messages,
-    commissioners_voters_rooms,
-    elections,
-    partylists,
-    positions,
-    publicity,
-    reported_problems,
-    votes,
+  admin_commissioners_messages,
+  admin_commissioners_rooms,
+  commissioners,
+  commissioners_voters_messages,
+  commissioners_voters_rooms,
+  elections,
+  partylists,
+  positions,
+  publicity,
+  reported_problems,
+  votes,
 } from "@fleabay/db/schema";
 import { sendVoteCasted } from "@fleabay/email/emails/vote-casted";
 

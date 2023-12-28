@@ -3,9 +3,9 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
-    "dev": "pnpm db:start --filter @fleabay/db --parallel",
+    "dev": "pnpm db:start",
     "db:start": "docker compose up -d && tsx ./docker-await-mysql.ts",
-    "db:push": "pnpm with-env drizzle-kit push:mysql -- --verbose",
+    "db:push": "pnpm db:start && pnpm with-env drizzle-kit push:mysql -- --verbose",
     "db:studio": "pnpm with-env drizzle-kit studio --verbose",
     "db:generate": "pnpm with-env drizzle-kit generate:mysql",
     "clean": "rm -rf .turbo node_modules",

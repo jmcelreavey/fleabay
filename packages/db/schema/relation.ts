@@ -6,6 +6,8 @@ import {
   admin_commissioners_messages,
   admin_commissioners_rooms,
   affiliations,
+  auction_images,
+  auctions,
   candidates,
   commissioners,
   commissioners_voters_messages,
@@ -26,6 +28,17 @@ import {
   voters,
   votes,
 } from "./schema";
+
+export const auctionRelations = relations(auctions, ({ many }) => ({
+  auction_images: many(auction_images),
+}));
+
+export const auctionImagesRelations = relations(auction_images, ({ one }) => ({
+  auction: one(auctions, {
+    fields: [auction_images.auction_id],
+    references: [auctions.id],
+  }),
+}));
 
 export const electionsRelations = relations(elections, ({ many }) => ({
   votes: many(votes),

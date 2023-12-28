@@ -1,29 +1,26 @@
 "use client";
 
-import {
-    ActionIcon,
-    Anchor,
-    Container,
-    Group,
-    Menu,
-    MenuTarget,
-    Text,
-    UnstyledButton,
-} from "@mantine/core";
-import {
-    IconBrandFacebook,
-    IconBrandGithub,
-    IconBrandTwitter,
-    IconBrandYoutube,
-} from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import {
+  ActionIcon,
+  Anchor,
+  Container,
+  Group,
+  Menu,
+  MenuTarget,
+  Text,
+  UnstyledButton,
+} from "@mantine/core";
+import {
+  IconBrandFacebook,
+  IconBrandTwitter,
+  IconBrandYoutube,
+} from "@tabler/icons-react";
 
 export default function Footer() {
-  const params = useParams();
   return (
-    <Container h="100%" fluid={!!params?.electionDashboardSlug}>
+    <Container h="100%" fluid={true}>
       <Group justify="space-between" w="100%" gap={0} h="100%">
         <UnstyledButton component={Link} href="/">
           <Group gap={4}>
@@ -42,7 +39,7 @@ export default function Footer() {
           <ActionIcon
             variant="subtle"
             component={Link}
-            href="https://www.facebook.com/cvsufleabay/"
+            href="https://www.facebook.com/"
             target="_blank"
             size="lg"
           >
@@ -51,7 +48,7 @@ export default function Footer() {
           <ActionIcon
             variant="subtle"
             component={Link}
-            href="https://twitter.com/cvsufleabay"
+            href="https://twitter.com/"
             target="_blank"
             size="lg"
             visibleFrom="xs"
@@ -61,21 +58,11 @@ export default function Footer() {
           <ActionIcon
             variant="subtle"
             component={Link}
-            href="https://www.youtube.com/@e-boto"
+            href="https://www.youtube.com/"
             target="_blank"
             size="lg"
           >
             <IconBrandYoutube size="1.05rem" stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon
-            variant="subtle"
-            component={Link}
-            href="https://github.com/bricesuazo/fleabay-mo"
-            target="_blank"
-            size="lg"
-            visibleFrom="sm"
-          >
-            <IconBrandGithub size="1.05rem" stroke={1.5} />
           </ActionIcon>
 
           <Anchor size="sm" component={Link} href="/contact" visibleFrom="xs">

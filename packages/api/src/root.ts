@@ -1,3 +1,4 @@
+import { auctionRouter } from "./router/auction";
 import { authRouter } from "./router/auth";
 import { candidateRouter } from "./router/candidate";
 import { electionRouter } from "./router/election";
@@ -17,6 +18,7 @@ export const appRouter = createTRPCRouter({
   position: positionRouter,
   partylist: partylistRouter,
   system: systemRouter,
+  auction: auctionRouter,
 });
 
 // export type definition of API

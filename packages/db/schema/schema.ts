@@ -2,6 +2,8 @@ import type { AdapterAccount } from "@auth/core/adapters";
 import { sql } from "drizzle-orm";
 import {
   date,
+  decimal,
+  float,
   index,
   int,
   json,
@@ -84,6 +86,43 @@ export const elections = mysqlTable(
     ),
     electionDeletedAtIdx: index("electionDeletedAt_idx").on(
       election.deleted_at,
+    ),
+  }),
+);
+
+export const auctions = mysqlTable(
+  "auction",
+  {
+    id,
+    name: text("name").notNull(),
+    description: longtext("description"),
+    start_date: date("start_date").notNull(),
+    end_date: date("end_date").notNull(),
+    current_price: decimal("current_price", { precision: 2 }).notNull(),
+    deleted_at,
+
+    created_at,
+    updated_at,
+  },
+  (auction) => ({
+    auctionIdIdx: index("auctionId_idx").on(auction.id),
+    auctionStartDateIdx: index("auctionStartDate_idx").on(auction.start_date),
+    auctionEndDateIdx: index("auctionEndDate_idx").on(auction.end_date),
+    auctionDeletedAtIdx: index("auctionDeletedAt_idx").on(auction.deleted_at),
+  }),
+);
+
+export const auction_images = mysqlTable(
+  "auction_image",
+  {
+    id,
+    image: json("image").$type<File>(),
+    auction_id: varchar("auction_id", { length: 256 }).notNull(),
+  },
+  (auction_image) => ({
+    auctionImageIdIdx: index("auctionImageId_idx").on(auction_image.id),
+    auctionImageAuctionIdIdx: index("auctionImageAuctionId_idx").on(
+      auction_image.auction_id,
     ),
   }),
 );
@@ -641,6 +680,8 @@ export type GeneratedElectionResult =
   typeof generated_election_results.$inferSelect;
 export type VoterField = typeof voter_fields.$inferSelect;
 export type ReportedProblem = typeof reported_problems.$inferSelect;
+export type Auction = typeof auctions.$inferSelect;
+export type AuctionImage = typeof auction_images.$inferSelect;
 
 export type CommissionersVotersMessage =
   typeof commissioners_voters_messages.$inferSelect;

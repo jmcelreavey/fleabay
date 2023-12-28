@@ -1,42 +1,29 @@
-import ContactForm from "@/components/client/components/contact-form";
-import PublicElections from "@/components/client/components/public-elections";
+import Link from "next/link";
+import Auctions from "@/components/client/components/auctions";
 import classes from "@/styles/Home.module.css";
 import {
-    Accordion,
-    AccordionControl,
-    AccordionItem,
-    AccordionPanel,
-    Box,
-    Button,
-    Container,
-    Flex,
-    SimpleGrid,
-    Stack,
-    Text,
-    Title,
+  Box,
+  Button,
+  Container,
+  Flex,
+  Stack,
+  Text,
+  Title,
 } from "@mantine/core";
-import dynamic from "next/dynamic";
-import Image from "next/image";
-import Link from "next/link";
 import Balancer from "react-wrap-balancer";
-
-import { FAQs } from "@fleabay/constants";
-
-const ReactPlayer = dynamic(
-  () => import("@/components/client/components/react-player"),
-  { ssr: false },
-);
 
 export default function HomePage() {
   return (
-    <Container size="md" pos="relative" pb={80}>
+    <Container size="90%" pos="relative" pb={80}>
       <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
       <Dots className={classes.dots} style={{ left: 60, top: 0 }} />
-      <Dots className={classes.dots} style={{ left: 0, top: 140 }} />
+      <Dots className={classes.dots} style={{ left: 0, top: 60 }} />
       <Dots className={classes.dots} style={{ right: 0, top: 60 }} />
+      <Dots className={classes.dots} style={{ right: 0, top: 0 }} />
+      <Dots className={classes.dots} style={{ right: 60, top: 0 }} />
 
-      <Stack gap={80}>
-        <Box pos="relative" py={156}>
+      <Stack>
+        <Box pos="relative" py={52}>
           <Title
             ta={{ base: "left", sm: "center" }}
             fz={{ base: "2.25rem", sm: "3rem" }}
@@ -44,13 +31,7 @@ export default function HomePage() {
             lts={-1}
             className={classes.title}
           >
-            <Balancer>
-              Your{" "}
-              <Text component="span" className={classes.highlight} inherit>
-                One-Stop
-              </Text>{" "}
-              Online Voting Solution
-            </Balancer>
+            <Balancer>Udderly Unbelievable Deals</Balancer>
           </Title>
 
           <Container p={0} size="md">
@@ -59,9 +40,9 @@ export default function HomePage() {
               ta={{ base: "left", sm: "center" }}
             >
               <Balancer>
-                Empower your elections with fleabay, the versatile and web-based
-                voting platform that offers secure online elections for any type
-                of organization.
+                Sell your livestock with fleabay, the versatile and web-based
+                auction platform that offers secure online auctions for a
+                variety of livestock.
               </Balancer>
             </Text>
           </Container>
@@ -92,81 +73,8 @@ export default function HomePage() {
           </Flex>
         </Box>
 
-        <Stack gap="xl" id="what">
-          <Title order={2} ta="center">
-            <Balancer>Ano ang fleabay? (What is fleabay?)</Balancer>
-          </Title>
-
-          <Box className={classes.playerContainer}>
-            <ReactPlayer
-              url="https://www.youtube.com/watch?v=BKud553RTbk"
-              width="100%"
-              height="100%"
-              controls
-            />
-          </Box>
-        </Stack>
-
-        <Box id="public-elections">
-          <PublicElections />
-        </Box>
-
-        <SimpleGrid id="faq" cols={{ base: 1, sm: 2 }} pos="relative">
-          <Box
-            top={60}
-            style={{
-              aspectRatio: "3/2",
-            }}
-            pos={{ base: "inherit", sm: "sticky" }}
-          >
-            <Image
-              src="/images/faq.svg"
-              fill
-              alt="Frequently Asked Questions"
-              style={{
-                userSelect: "none",
-                pointerEvents: "none",
-                zIndex: -1,
-              }}
-            />
-          </Box>
-
-          <Box>
-            <Title order={2} ta="left" p="md" visibleFrom="sm">
-              Frequently Asked Questions
-            </Title>
-            <Title order={2} ta="center" p="md" hiddenFrom="sm">
-              Frequently Asked Questions
-            </Title>
-
-            <Accordion
-              chevronPosition="right"
-              defaultValue={FAQs[0]?.id ?? ""}
-              variant="separated"
-            >
-              {FAQs.map((item) => (
-                <AccordionItem key={item.id} value={item.id}>
-                  <AccordionControl>{item.question}</AccordionControl>
-                  <AccordionPanel>{item.answer}</AccordionPanel>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </Box>
-        </SimpleGrid>
-
-        <Box id="contact">
-          <ContactForm />
-        </Box>
-
-        <Stack gap="xs" className={classes.cta}>
-          <Title ta="center">
-            <Balancer>Ready to get started?</Balancer>
-          </Title>
-          <Text ta="center" fz="lg">
-            <Balancer>
-              Create your free account today and start voting online in minutes.
-            </Balancer>
-          </Text>
+        <Stack gap="xl" id="auctions">
+          <Auctions />
         </Stack>
       </Stack>
     </Container>
