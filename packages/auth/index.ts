@@ -1,6 +1,6 @@
 import GoogleProvider from "@auth/core/providers/google";
 import type { DefaultSession } from "@auth/core/types";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import type { Provider } from "next-auth/providers";
 
@@ -29,25 +29,12 @@ export const {
   update,
   auth,
 } = NextAuth({
-  adapter: DrizzleAdapter(db),
+  adapter: PrismaAdapter(db),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }) as Provider, // TODO: remove this `as`
-
-    // TODO: NodeMailer doesn't work in Edge Runtime for now
-    // EmailProvider({
-    //   server: {
-    //     host: env.SMTP_HOST,
-    //     port: env.SMTP_PORT,
-    //     auth: {
-    //       user: env.SMTP_USER,
-    //       pass: env.SMTP_PASSWORD,
-    //     },
-    //   },
-    //   from: env.EMAIL_FROM,
-    // }) as unknown as Provider, // TODO: remove this `as`,
+    }) as Provider,
   ],
   callbacks: {
     session: ({ session, user }) => ({
@@ -57,19 +44,5 @@ export const {
         id: user.id,
       },
     }),
-
-    // @TODO - if you wanna have auth on the edge
-    // jwt: ({ token, profile }) => {
-    //   if (profile?.id) {
-    //     token.id = profile.id;
-    //     token.image = profile.picture;
-    //   }
-    //   return token;
-    // },
-
-    // @TODO
-    // authorized({ request, auth }) {
-    //   return !!auth?.user
-    // }
   },
 });

@@ -16,6 +16,9 @@
     "db:start": {},
     "db:push": {},
     "db:studio": {},
+    "db:migrate": {},
+    "db:seed": {},
+    "db:nuke": {},
     "db:generate": {},
     "email:dev": {}
   },

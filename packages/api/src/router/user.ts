@@ -2,13 +2,6 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { update } from "@fleabay/auth";
-import { eq } from "@fleabay/db";
-import {
-    accounts,
-    deleted_accounts,
-    deleted_users,
-    users,
-} from "@fleabay/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -31,13 +24,15 @@ export const userRouter = createTRPCRouter({
     )
     .mutation(async ({ input, ctx }) => {
       console.log(input);
-      const user = await ctx.db.query.users.findFirst({
-        where: (users, { eq }) => eq(users.id, ctx.session.user.id),
+      const user = await ctx.db.user.findFirst({
+        where: {
+          id: ctx.session.user.id,
+        },
       });
 
       if (!user) throw new TRPCError({ code: "NOT_FOUND" });
 
-      return await ctx.db.transaction(async (db) => {
+      return await ctx.db.$transaction(async (db) => {
         const image_file = input.image
           ? await fetch(input.image.base64)
               .then((res) => res.blob())
@@ -54,27 +49,24 @@ export const userRouter = createTRPCRouter({
           : input.image;
 
         if (user.image_file && !image_file && !input.image)
-          await ctx.utapi.deleteFiles(user.image_file.key);
+          await ctx.utapi.deleteFiles(user.image_file as string);
 
-        await db
-          .update(users)
-          .set({
-            //   first_name: input.firstName,
-            //   middle_name: input.middleName,
-            //   last_name: input.lastName,
+        await db.user.update({
+          where: {
+            id: ctx.session.user.id,
+          },
+          data: {
+            // first_name: input.firstName,
+            // middle_name: input.middleName,
+            // last_name: input.lastName,
             name: input.name,
-            image_file: image_file
-              ? image_file
-              : input.image
-                ? user.image_file
-                : null,
             image: image_file
               ? image_file.url
               : input.image
                 ? user.image
                 : null,
-          })
-          .where(eq(users.id, ctx.session.user.id));
+          },
+        });
 
         return update({
           user: {
@@ -90,32 +82,36 @@ export const userRouter = createTRPCRouter({
       });
     }),
 
-  deleteAccount: protectedProcedure.mutation(async ({ ctx }) => {
-    await ctx.db.transaction(async (db) => {
-      const user = await db.query.users.findFirst({
-        where: (users, { eq }) => eq(users.id, ctx.session.user.id),
-      });
+  // deleteAccount: protectedProcedure.mutation(async ({ ctx }) => {
+  //   await ctx.db.$transaction(async (db) => {
+  //     const user = await db.user.findFirst({
+  //       where: {
+  //         id: ctx.session.user.id,
+  //       },
+  //     });
 
-      if (!user) throw new TRPCError({ code: "NOT_FOUND" });
+  //     if (!user) throw new TRPCError({ code: "NOT_FOUND" });
 
-      const account = await db.query.accounts.findFirst({
-        where: (accounts, { eq }) => eq(accounts.userId, ctx.session.user.id),
-      });
+  //     const account = await db.account.findFirst({
+  //       where: {
+  //         userId: ctx.session.user.id,
+  //       },
+  //     });
 
-      if (!account) throw new TRPCError({ code: "NOT_FOUND" });
+  //     if (!account) throw new TRPCError({ code: "NOT_FOUND" });
 
-      await db.insert(deleted_users).values(user);
-      await db.insert(deleted_accounts).values({
-        ...account,
-        deletedUserId: user.id,
-      });
+  //     await db.deleted_user.create({
+  //       data: {
+  //         ...user,
+  //       },
+  //     });
 
-      await db.delete(users).where(eq(users.id, ctx.session.user.id));
-      await db.delete(accounts).where(eq(accounts.userId, ctx.session.user.id));
-    });
+  //     await db.delete(users).where(eq(users.id, ctx.session.user.id));
+  //     await db.delete(accounts).where(eq(accounts.userId, ctx.session.user.id));
+  //   });
 
-    return true;
-  }),
+  //   return true;
+  // }),
 
   //   checkPassword: protectedProcedure
   //     .input(
