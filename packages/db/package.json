@@ -4,6 +4,7 @@
   "types": "./index.ts",
   "scripts": {
     "dev": "pnpm db:start",
+    "db": "pnpm with-env drizzle-kit --",
     "db:start": "docker compose up -d && tsx ./docker-await-mysql.ts",
     "db:push": "pnpm db:start && pnpm with-env drizzle-kit push:mysql -- --verbose",
     "db:studio": "pnpm with-env drizzle-kit studio --verbose",

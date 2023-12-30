@@ -12,6 +12,7 @@
       "persistent": true
     },
     "start": {},
+    "db": {},
     "db:start": {},
     "db:push": {},
     "db:studio": {},

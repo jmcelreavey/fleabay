@@ -1,5 +1,13 @@
 .card {
   background-color: var(--mantine-color-body);
+
+  &.highest-bid {
+    color: var(--mantine-color-green);
+  }
+
+  &.no-longer-highest-bid {
+    color: var(--mantine-color-red);
+  }
 }
 
 .imageSection {

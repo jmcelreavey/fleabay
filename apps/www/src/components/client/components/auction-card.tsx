@@ -43,7 +43,7 @@ export function AuctionCard({
     images?.[0]?.image?.url ?? "./images/auction-placeholder.jpg";
 
   return (
-    <Card withBorder radius="md" className={classes.card}>
+    <Card withBorder radius="md" className={classes.card + " highest-bid"}>
       <Card.Section className={classes.imageSection}>
         <Group justify="center">
           <Badge variant="outline">

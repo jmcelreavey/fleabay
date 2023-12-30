@@ -3,7 +3,6 @@ import { sql } from "drizzle-orm";
 import {
   date,
   decimal,
-  float,
   index,
   int,
   json,
@@ -32,8 +31,11 @@ const updated_at = timestamp("updated_at")
   .onUpdateNow()
   .notNull();
 const election_id = varchar("election_id", { length: 256 }).notNull();
+const auction_id = varchar("auction_id", { length: 256 }).notNull();
 // .references(() => elections.id);
 const user_id = varchar("user_id", { length: 256 }).notNull();
+const seller_id = varchar("seller_id", { length: 256 }).notNull();
+const buyer_id = varchar("buyer_id", { length: 256 }).notNull();
 // .references(() => users.id);
 const voter_id = varchar("voter_id", { length: 256 }).notNull();
 // .references(() => voters.id);
@@ -90,6 +92,53 @@ export const elections = mysqlTable(
   }),
 );
 
+export const bids = mysqlTable(
+  "bid",
+  {
+    id,
+    amount: decimal("amount", { precision: 2 }).notNull(),
+    buyer_id,
+    auction_id,
+
+    created_at,
+  },
+  (bid) => ({
+    bidIdIdx: index("bidId_idx").on(bid.id),
+    bidBuyerIdIdx: index("bidBuyerId_idx").on(bid.buyer_id),
+    bidAuctionIdIdx: index("bidAuctionId_idx").on(bid.auction_id),
+  }),
+);
+
+export const buyers = mysqlTable(
+  "buyer",
+  {
+    id,
+    created_at,
+    deleted_at,
+    user_id,
+  },
+  (buyer) => ({
+    buyerIdIdx: index("buyerId_idx").on(buyer.id),
+    buyerUserIdIdx: index("buyerUserId_idx").on(buyer.user_id),
+    buyerDeletedAtIdx: index("buyerDeletedAt_idx").on(buyer.deleted_at),
+  }),
+);
+
+export const sellers = mysqlTable(
+  "seller",
+  {
+    id,
+    created_at,
+    deleted_at,
+    user_id,
+  },
+  (seller) => ({
+    sellerIdIdx: index("sellerId_idx").on(seller.id),
+    sellerUserIdIdx: index("sellerUserId_idx").on(seller.user_id),
+    sellerDeletedAtIdx: index("sellerDeletedAt_idx").on(seller.deleted_at),
+  }),
+);
+
 export const auctions = mysqlTable(
   "auction",
   {
@@ -98,9 +147,14 @@ export const auctions = mysqlTable(
     description: longtext("description"),
     start_date: date("start_date").notNull(),
     end_date: date("end_date").notNull(),
-    current_price: decimal("current_price", { precision: 2 }).notNull(),
-    deleted_at,
+    bid_increment: decimal("bid_increment", { precision: 2 })
+      .default("1")
+      .notNull(),
 
+    highest_bid_id: varchar("highest_bid_id", { length: 256 }),
+    seller_id,
+
+    deleted_at,
     created_at,
     updated_at,
   },
@@ -109,6 +163,10 @@ export const auctions = mysqlTable(
     auctionStartDateIdx: index("auctionStartDate_idx").on(auction.start_date),
     auctionEndDateIdx: index("auctionEndDate_idx").on(auction.end_date),
     auctionDeletedAtIdx: index("auctionDeletedAt_idx").on(auction.deleted_at),
+    auctionHighestBidIdIdx: index("auctionHighestBidId_idx").on(
+      auction.highest_bid_id,
+    ),
+    auctionSellerIdIdx: index("auctionSellerId_idx").on(auction.seller_id),
   }),
 );
 

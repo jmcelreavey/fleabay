@@ -8,6 +8,8 @@ import {
   affiliations,
   auction_images,
   auctions,
+  bids,
+  buyers,
   candidates,
   commissioners,
   commissioners_voters_messages,
@@ -22,6 +24,7 @@ import {
   platforms,
   positions,
   reported_problems,
+  sellers,
   sessions,
   users,
   voter_fields,
@@ -29,8 +32,38 @@ import {
   votes,
 } from "./schema";
 
-export const auctionRelations = relations(auctions, ({ many }) => ({
+export const buyerRelations = relations(buyers, ({ many }) => ({
+  user: many(users),
+  bids: many(bids),
+}));
+
+export const sellerRelations = relations(sellers, ({ many }) => ({
+  user: many(users),
+  auctions: many(auctions),
+}));
+
+export const auctionRelations = relations(auctions, ({ many, one }) => ({
   auction_images: many(auction_images),
+  seller: one(sellers, {
+    fields: [auctions.seller_id],
+    references: [sellers.id],
+  }),
+  highest_bid: one(bids, {
+    fields: [auctions.highest_bid_id],
+    references: [bids.id],
+  }),
+  bids: many(bids),
+}));
+
+export const bidRelations = relations(bids, ({ one }) => ({
+  auction: one(auctions, {
+    fields: [bids.auction_id],
+    references: [auctions.id],
+  }),
+  buyer: one(buyers, {
+    fields: [bids.buyer_id],
+    references: [buyers.id],
+  }),
 }));
 
 export const auctionImagesRelations = relations(auction_images, ({ one }) => ({
@@ -215,8 +248,16 @@ export const events_attendedRelations = relations(
   }),
 );
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many, one }) => ({
   accounts: many(accounts),
+  sellerAccount: one(sellers, {
+    fields: [users.id],
+    references: [sellers.user_id],
+  }),
+  buyerAccount: one(buyers, {
+    fields: [users.id],
+    references: [buyers.user_id],
+  }),
 }));
 export const deletedUsersRelations = relations(deleted_users, ({ many }) => ({
   accounts: many(deleted_accounts),
