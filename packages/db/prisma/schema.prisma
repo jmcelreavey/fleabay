@@ -7,413 +7,156 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model account {
-  userId            String  @db.VarChar(255)
-  type              String  @db.VarChar(255)
-  provider          String  @db.VarChar(255)
-  providerAccountId String  @db.VarChar(255)
-  refresh_token     String? @db.VarChar(255)
-  access_token      String? @db.VarChar(255)
-  expires_at        Int?
-  token_type        String? @db.VarChar(255)
-  scope             String? @db.VarChar(255)
-  id_token          String? @db.Text
-  session_state     String? @db.VarChar(255)
+model Account {
+  id     String @id @default(cuid())
+  userId String
 
-  @@id([provider, providerAccountId])
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([type, provider])
   @@index([userId])
 }
 
-model achievement {
-  id            String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name          String   @db.Text
-  year          DateTime @db.Date
-  created_at    DateTime @default(now()) @db.Timestamp(0)
-  updated_at    DateTime @default(now()) @db.Timestamp(0)
-  credential_id String   @db.VarChar(256)
+model Session {
+  id     String @id @default(cuid())
+  userId String
 
-  @@index([credential_id], map: "achievementCredentialId_idx")
-  @@index([id], map: "achievementId_idx")
+  expires      DateTime
+  sessionToken String   @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expires])
+  @@index([userId])
 }
 
-model admin_commissioners_message {
-  id         String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  message    String    @db.Text
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at DateTime? @db.Timestamp(0)
-  room_id    String    @db.VarChar(256)
-  user_id    String    @db.VarChar(256)
+model User {
+  id String @id @default(cuid())
 
-  @@index([id], map: "commissionersVotersMessageId_idx")
-  @@index([room_id], map: "commissionersVotersMessageRoomId_idx")
-  @@index([user_id], map: "commissionersVotersMessageUserId_idx")
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  accounts  Account[]
+  sessions  Session[]
+  buyer     Buyer?
+  seller    Seller?
+
+  @@index([name, emailVerified])
 }
 
-model admin_commissioners_room {
-  id          String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name        String    @db.Text
-  created_at  DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at  DateTime? @db.Timestamp(0)
-  election_id String    @db.VarChar(256)
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-  @@index([election_id], map: "commissionersVotersRoomElectionId_idx")
-  @@index([id], map: "commissionersVotersRoomId_idx")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([identifier, token])
 }
 
-model affiliation {
-  id            String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  org_name      String   @db.Text
-  org_position  String   @db.Text
-  start_year    DateTime @db.Date
-  end_year      DateTime @db.Date
-  created_at    DateTime @default(now()) @db.Timestamp(0)
-  updated_at    DateTime @default(now()) @db.Timestamp(0)
-  credential_id String   @db.VarChar(256)
+model Auction {
+  id            Int     @id @default(autoincrement())
+  startingPrice Decimal @db.Decimal(7, 2)
+  sellerId      String
+  highestBidId  Int?    @unique
 
-  @@index([credential_id], map: "affiliationCredentialId_idx")
-  @@index([id], map: "affiliationId_idx")
+  name         String
+  description  String?  @db.Text
+  startDate    DateTime
+  endDate      DateTime
+  bidIncrement Decimal  @default(1) @db.Decimal(7, 2)
+
+  deletedAt  DateTime?
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  images     AuctionImage[]
+  bids       Bid[]          @relation("AuctionToBids")
+  highestBid Bid?           @relation("AuctionToHighestBid", fields: [highestBidId], references: [id])
+  seller     Seller         @relation(fields: [sellerId], references: [id])
+
+  @@index([startDate, endDate])
+  @@index([sellerId])
 }
 
-model auction {
-  id             String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name           String    @db.Text
-  description    String?   @db.LongText
-  start_date     DateTime  @db.Date
-  end_date       DateTime  @db.Date
-  deleted_at     DateTime? @db.Timestamp(0)
-  created_at     DateTime  @default(now()) @db.Timestamp(0)
-  updated_at     DateTime  @default(now()) @db.Timestamp(0)
-  bid_increment  Decimal   @default(1) @db.Decimal(2, 0)
-  highest_bid_id String?   @db.VarChar(256)
-  seller_id      String    @db.VarChar(256)
+model AuctionImage {
+  id        Int @id @default(autoincrement())
+  auctionId Int
 
-  images auction_image[]
+  imageKey String
+  imageUrl String
 
-  @@index([deleted_at], map: "auctionDeletedAt_idx")
-  @@index([end_date], map: "auctionEndDate_idx")
-  @@index([highest_bid_id], map: "auctionHighestBidId_idx")
-  @@index([id], map: "auctionId_idx")
-  @@index([seller_id], map: "auctionSellerId_idx")
-  @@index([start_date], map: "auctionStartDate_idx")
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  auction   Auction   @relation(fields: [auctionId], references: [id])
+
+  @@index([auctionId])
 }
 
-model auction_image {
-  id         String @id @unique(map: "election_id_unique") @db.VarChar(256)
-  image      Json?
-  auction_id String @db.VarChar(256)
+model Bid {
+  id        Int    @id @default(autoincrement())
+  auctionId Int
+  buyerId   String
 
-  auction auction @relation(fields: [auction_id], references: [id])
+  amount Decimal @db.Decimal(7, 2)
 
-  @@index([auction_id], map: "auctionImageAuctionId_idx")
-  @@index([id], map: "auctionImageId_idx")
+  deletedAt         DateTime?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  auction           Auction   @relation("AuctionToBids", fields: [auctionId], references: [id], map: "AuctionToBidsKey")
+  highestBidAuction Auction?  @relation("AuctionToHighestBid")
+  buyer             Buyer     @relation(fields: [buyerId], references: [id])
+
+  @@index([amount])
+  @@index([buyerId])
+  @@index([auctionId])
 }
 
-model bid {
-  id         String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  amount     Decimal  @db.Decimal(2, 0)
-  buyer_id   String   @db.VarChar(256)
-  auction_id String   @db.VarChar(256)
-  created_at DateTime @default(now()) @db.Timestamp(0)
+model Buyer {
+  id     String @id @default(cuid())
+  userId String @unique
 
-  @@index([auction_id], map: "bidAuctionId_idx")
-  @@index([buyer_id], map: "bidBuyerId_idx")
-  @@index([id], map: "bidId_idx")
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User      @relation(fields: [userId], references: [id])
+  bids      Bid[]
+
+  @@index([userId])
 }
 
-model buyer {
-  id         String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at DateTime? @db.Timestamp(0)
-  user_id    String    @db.VarChar(256)
+model Seller {
+  id     String @id @default(cuid())
+  userId String @unique
 
-  @@index([deleted_at], map: "buyerDeletedAt_idx")
-  @@index([id], map: "buyerId_idx")
-  @@index([user_id], map: "buyerUserId_idx")
-}
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  auctions  Auction[]
+  user      User      @relation(fields: [userId], references: [id])
 
-model candidate {
-  id            String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  slug          String    @db.VarChar(256)
-  first_name    String    @db.Text
-  middle_name   String?   @db.Text
-  last_name     String    @db.Text
-  image         Json?
-  created_at    DateTime  @default(now()) @db.Timestamp(0)
-  updated_at    DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at    DateTime? @db.Timestamp(0)
-  election_id   String    @db.VarChar(256)
-  credential_id String    @db.VarChar(256)
-  position_id   String    @db.VarChar(256)
-  partylist_id  String    @db.VarChar(256)
-
-  @@index([credential_id], map: "candidateCredentialId_idx")
-  @@index([election_id], map: "candidateElectionId_idx")
-  @@index([id], map: "candidateId_idx")
-  @@index([partylist_id], map: "candidatePartylistId_idx")
-  @@index([position_id], map: "candidatePositionId_idx")
-  @@index([slug], map: "candidateSlug_idx")
-}
-
-model commissioner {
-  id          String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at  DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at  DateTime? @db.Timestamp(0)
-  user_id     String    @db.VarChar(256)
-  election_id String    @db.VarChar(256)
-
-  @@index([deleted_at], map: "commissionerDeletedAt_idx")
-  @@index([election_id], map: "commissionerElectionId_idx")
-  @@index([id], map: "commissionerId_idx")
-  @@index([user_id, election_id], map: "commissionerUserIdElectionId_idx")
-  @@index([user_id], map: "commissionerUserId_idx")
-}
-
-model commissioners_voters_message {
-  id         String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  message    String    @db.Text
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at DateTime? @db.Timestamp(0)
-  room_id    String    @db.VarChar(256)
-  user_id    String    @db.VarChar(256)
-
-  @@index([id], map: "commissionersVotersMessageId_idx")
-  @@index([room_id], map: "commissionersVotersMessageRoomId_idx")
-  @@index([user_id], map: "commissionersVotersMessageUserId_idx")
-}
-
-model commissioners_voters_room {
-  id          String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name        String    @db.Text
-  created_at  DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at  DateTime? @db.Timestamp(0)
-  election_id String    @db.VarChar(256)
-
-  @@index([election_id], map: "commissionersVotersRoomElectionId_idx")
-  @@index([id], map: "commissionersVotersRoomId_idx")
-}
-
-model credential {
-  id           String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at   DateTime @default(now()) @db.Timestamp(0)
-  updated_at   DateTime @default(now()) @db.Timestamp(0)
-  candidate_id String   @db.VarChar(256)
-
-  @@index([candidate_id], map: "credentialCandidateId_idx")
-  @@index([id], map: "credentialId_idx")
-}
-
-model deleted_account {
-  deletedUserId     String  @db.VarChar(255)
-  type              String  @db.VarChar(255)
-  provider          String  @db.VarChar(255)
-  providerAccountId String  @db.VarChar(255)
-  refresh_token     String? @db.VarChar(255)
-  access_token      String? @db.VarChar(255)
-  expires_at        Int?
-  token_type        String? @db.VarChar(255)
-  scope             String? @db.VarChar(255)
-  id_token          String? @db.Text
-  session_state     String? @db.VarChar(255)
-
-  @@id([provider, providerAccountId])
-  @@index([deletedUserId], map: "deletedAccount_deletedUserId_idx")
-}
-
-model deleted_user {
-  id            String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name          String?   @db.VarChar(255)
-  email         String    @unique(map: "deleted_user_email_unique") @db.VarChar(255)
-  emailVerified DateTime? @default(now()) @db.Timestamp(3)
-  image_file    Json?
-  image         String?   @db.Text
-
-  @@index([email], map: "deletedUserEmail_idx")
-  @@index([id], map: "deletedUserId_idx")
-}
-
-model election {
-  id                String             @id @unique(map: "election_id_unique") @db.VarChar(256)
-  slug              String             @unique(map: "election_slug_unique") @db.VarChar(256)
-  name              String             @db.Text
-  description       String?            @db.LongText
-  start_date        DateTime           @db.Date
-  end_date          DateTime           @db.Date
-  voting_hour_start Int                @default(7)
-  voting_hour_end   Int                @default(19)
-  publicity         election_publicity @default(PRIVATE)
-  logo              Json?
-  voter_domain      String?            @db.Text
-  deleted_at        DateTime?          @db.Timestamp(0)
-  created_at        DateTime           @default(now()) @db.Timestamp(0)
-  updated_at        DateTime           @default(now()) @db.Timestamp(0)
-
-  @@index([deleted_at], map: "electionDeletedAt_idx")
-  @@index([end_date], map: "electionEndDate_idx")
-  @@index([id], map: "electionId_idx")
-  @@index([slug], map: "electionSlug_idx")
-  @@index([start_date], map: "electionStartDate_idx")
-  @@index([voting_hour_end], map: "electionVotingHourEnd_idx")
-  @@index([voting_hour_start], map: "electionVotingHourStart_idx")
-}
-
-model event_attended {
-  id            String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name          String   @db.Text
-  year          DateTime @db.Date
-  created_at    DateTime @default(now()) @db.Timestamp(0)
-  updated_at    DateTime @default(now()) @db.Timestamp(0)
-  credential_id String   @db.VarChar(256)
-
-  @@index([credential_id], map: "eventAttendedCredentialId_idx")
-  @@index([id], map: "eventAttendedId_idx")
-}
-
-model generated_election_result {
-  id          String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at  DateTime @default(now()) @db.Timestamp(0)
-  election_id String   @db.VarChar(256)
-  result      Json
-
-  @@index([election_id], map: "generatedElectionResultElectionId_idx")
-  @@index([id], map: "generatedElectionResultId_idx")
-}
-
-model partylist {
-  id          String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name        String    @db.Text
-  acronym     String    @db.Text
-  description String?   @db.LongText
-  logo_link   String?   @db.LongText
-  created_at  DateTime  @default(now()) @db.Timestamp(0)
-  updated_at  DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at  DateTime? @db.Timestamp(0)
-  election_id String    @db.VarChar(256)
-
-  @@index([election_id], map: "partylistElectionId_idx")
-  @@index([id], map: "partylistId_idx")
-}
-
-model platform {
-  id           String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  title        String   @db.Text
-  description  String?  @db.LongText
-  created_at   DateTime @default(now()) @db.Timestamp(0)
-  updated_at   DateTime @default(now()) @db.Timestamp(0)
-  candidate_id String   @db.VarChar(256)
-
-  @@index([candidate_id], map: "platformCandidateId_idx")
-  @@index([id], map: "platformId_idx")
-}
-
-model position {
-  id          String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name        String    @db.Text
-  description String?   @db.LongText
-  order       Int
-  min         Int       @default(0)
-  max         Int       @default(1)
-  created_at  DateTime  @default(now()) @db.Timestamp(0)
-  updated_at  DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at  DateTime? @db.Timestamp(0)
-  election_id String    @db.VarChar(256)
-
-  @@index([election_id], map: "positionElectionId_idx")
-  @@index([id], map: "positionId_idx")
-}
-
-model reported_problem {
-  id          String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  subject     String   @db.LongText
-  description String   @db.LongText
-  created_at  DateTime @default(now()) @db.Timestamp(0)
-  election_id String   @db.VarChar(256)
-  user_id     String   @db.VarChar(256)
-
-  @@index([election_id], map: "reportedProblemElectionId_idx")
-  @@index([id], map: "reportedProblemId_idx")
-  @@index([user_id], map: "reportedProblemUserId_idx")
-}
-
-model seller {
-  id         String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at DateTime  @default(now()) @db.Timestamp(0)
-  deleted_at DateTime? @db.Timestamp(0)
-  user_id    String    @db.VarChar(256)
-
-  @@index([deleted_at], map: "sellerDeletedAt_idx")
-  @@index([id], map: "sellerId_idx")
-  @@index([user_id], map: "sellerUserId_idx")
-}
-
-model session {
-  sessionToken String   @id @db.VarChar(255)
-  userId       String   @db.VarChar(255)
-  expires      DateTime @db.Timestamp(0)
-
-  @@index([sessionToken], map: "sessionToken_idx")
-  @@index([userId], map: "sessionUserId_idx")
-}
-
-model user {
-  id            String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name          String?   @db.VarChar(255)
-  email         String    @unique(map: "user_email_unique") @db.VarChar(255)
-  emailVerified DateTime? @default(now()) @db.Timestamp(3)
-  image_file    Json?
-  image         String?   @db.Text
-
-  @@index([email], map: "userEmail_idx")
-  @@index([id], map: "userId_idx")
-}
-
-model verification_token {
-  identifier String   @db.VarChar(255)
-  token      String   @db.VarChar(255)
-  expires    DateTime @db.Timestamp(0)
-
-  @@id([identifier, token])
-}
-
-model vote {
-  id           String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at   DateTime @default(now()) @db.Timestamp(0)
-  voter_id     String   @db.VarChar(256)
-  candidate_id String?  @db.VarChar(256)
-  position_id  String?  @db.VarChar(256)
-  election_id  String   @db.VarChar(256)
-
-  @@index([candidate_id], map: "voteCandidateId_idx")
-  @@index([election_id], map: "voteElectionId_idx")
-  @@index([id], map: "voteId_idx")
-  @@index([position_id], map: "votePositionId_idx")
-  @@index([voter_id], map: "voteVoterId_idx")
-}
-
-model voter {
-  id          String    @id @unique(map: "election_id_unique") @db.VarChar(256)
-  created_at  DateTime  @default(now()) @db.Timestamp(0)
-  email       String    @db.VarChar(256)
-  field       Json?
-  deleted_at  DateTime? @db.Timestamp(0)
-  election_id String    @db.VarChar(256)
-
-  @@index([election_id], map: "voterElectionId_idx")
-  @@index([email], map: "voterEmail_idx")
-  @@index([id], map: "voterId_idx")
-}
-
-model voter_field {
-  id          String   @id @unique(map: "election_id_unique") @db.VarChar(256)
-  name        String   @db.Text
-  created_at  DateTime @default(now()) @db.Timestamp(0)
-  election_id String   @db.VarChar(256)
-
-  @@index([election_id], map: "voterFieldElectionId_idx")
-  @@index([id], map: "voterFieldId_idx")
-}
-
-enum election_publicity {
-  PRIVATE
-  VOTER
-  PUBLIC
+  @@index([userId])
 }

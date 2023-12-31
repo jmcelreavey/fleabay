@@ -1,23 +1,18 @@
-import {
-    MyElectionsAsCommissioner as MyElectionsAsCommissionerClient,
-    MyElectionsAsVoter as MyElectionsAsVoterClient,
-} from "@/components/client/components/my-elections";
-import Dashboard from "@/components/client/layout/dashboard";
-import CreateElection from "@/components/client/modals/create-election";
-import { api } from "@/trpc/server";
-import {
-    Box,
-    Container,
-    Flex,
-    Group,
-    Skeleton,
-    Stack,
-    Text,
-    Title,
-} from "@mantine/core";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
+import Dashboard from "@/components/client/layout/dashboard";
+import CreateElection from "@/components/client/modals/create-election";
+import {
+  Box,
+  Container,
+  Flex,
+  Group,
+  Skeleton,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
 
 import { auth } from "@fleabay/auth";
 
@@ -58,9 +53,7 @@ export default async function Page() {
                     ))}
                   </>
                 }
-              >
-                <MyElectionsAsCommissioner />
-              </Suspense>
+              ></Suspense>
             </Group>
           </Box>
 
@@ -81,26 +74,11 @@ export default async function Page() {
                     ))}
                   </>
                 }
-              >
-                <MyElectionsAsVoter />
-              </Suspense>
+              ></Suspense>
             </Group>
           </Box>
         </Stack>
       </Container>
     </Dashboard>
   );
-}
-
-async function MyElectionsAsCommissioner() {
-  const electionsAsCommissioner =
-    await api.election.getMyElectionAsCommissioner.query();
-
-  return (
-    <MyElectionsAsCommissionerClient initialData={electionsAsCommissioner} />
-  );
-}
-async function MyElectionsAsVoter() {
-  const electionsAsVoter = await api.election.getMyElectionAsVoter.query();
-  return <MyElectionsAsVoterClient initialData={electionsAsVoter} />;
 }

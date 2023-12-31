@@ -17,12 +17,9 @@
     "with-env": "dotenv -e ../../.env.local --"
   },
   "dependencies": {
-    "@auth/core": "^0.18.6",
     "@prisma/client": "^5.6.0",
     "tsx": "^4.6.2",
-    "mysql2": "^3.6.5",
-    "nanoid": "^5.0.4",
-    "uploadthing": "^6.1.0"
+    "mysql2": "^3.6.5"
   },
   "devDependencies": {
     "@fleabay/eslint-config": "workspace:*",

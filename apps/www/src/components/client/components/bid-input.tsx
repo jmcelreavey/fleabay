@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Button, NumberInput } from "@mantine/core";
 
-import { Auction } from "@fleabay/db/schema";
-
-export const BidInput = ({ auction }: { auction: Auction }) => {
-  const fixedValue = Number(auction.current_price).toFixed(2);
+export const BidInput = ({ currentPrice }: { currentPrice: number }) => {
+  const fixedValue = Number(currentPrice).toFixed(2);
   const [value, setValue] = useState(fixedValue);
 
   return (
@@ -18,7 +16,7 @@ export const BidInput = ({ auction }: { auction: Auction }) => {
       value={value}
       step={0.01}
       onBlur={(value) => {
-        if (value.currentTarget.value < auction.current_price) {
+        if (value.currentTarget.value < currentPrice.toString()) {
           setValue(fixedValue);
         } else {
           setValue(Number(value.currentTarget.value).toFixed(2));

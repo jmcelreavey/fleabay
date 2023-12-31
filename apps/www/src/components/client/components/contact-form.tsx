@@ -1,7 +1,6 @@
 "use client";
 
 import classes from "@/styles/Home.module.css";
-import { api } from "@/trpc/client";
 import {
   Box,
   Button,
@@ -17,11 +16,6 @@ import { hasLength, isEmail, useForm } from "@mantine/form";
 import { IconAt, IconMapPin, IconPhone, IconSun } from "@tabler/icons-react";
 
 export default function ContactForm() {
-  const sendMessageMutation = api.system.sendMessage.useMutation({
-    onSuccess: () => {
-      form.reset();
-    },
-  });
   const form = useForm<{
     name: string;
     email: string;
@@ -49,10 +43,7 @@ export default function ContactForm() {
   return (
     <Paper radius="lg" withBorder p="sm">
       <Flex direction={{ base: "column", sm: "row" }}>
-        <div
-          className={classes.contacts}
-          style={{ backgroundImage: `url(/images/bg.svg)` }}
-        >
+        <div className={classes.contacts}>
           <Text fz="lg" fw={700} className={classes["title-parent"]} c="#fff">
             Contact information
           </Text>
@@ -100,9 +91,7 @@ export default function ContactForm() {
 
         <form
           className={classes.form}
-          onSubmit={form.onSubmit((values) =>
-            sendMessageMutation.mutate(values),
-          )}
+          onSubmit={form.onSubmit((values) => console.log(values))}
         >
           <Text fz="lg" fw={700} className={classes["title-parent"]}>
             Get in touch
@@ -113,7 +102,7 @@ export default function ContactForm() {
               <TextInput
                 label="Name"
                 placeholder="Your name"
-                disabled={sendMessageMutation.isPending}
+                disabled={false}
                 w="100%"
                 {...form.getInputProps("name")}
               />
@@ -121,7 +110,7 @@ export default function ContactForm() {
                 label="Email Address"
                 placeholder="brice@bricesuazo.com"
                 w="100%"
-                disabled={sendMessageMutation.isPending}
+                disabled={false}
                 required
                 {...form.getInputProps("email")}
               />
@@ -131,7 +120,7 @@ export default function ContactForm() {
               mt="md"
               label="Subject"
               placeholder="Subject"
-              disabled={sendMessageMutation.isPending}
+              disabled={false}
               required
               {...form.getInputProps("subject")}
             />
@@ -144,7 +133,7 @@ export default function ContactForm() {
               autosize
               minRows={2}
               maxRows={5}
-              disabled={sendMessageMutation.isPending}
+              disabled={false}
               {...form.getInputProps("message")}
             />
 
@@ -152,7 +141,7 @@ export default function ContactForm() {
               <Button
                 type="submit"
                 w={{ base: "100%", sm: "fit-content" }}
-                loading={sendMessageMutation.isPending}
+                loading={false}
               >
                 Send message
               </Button>

@@ -16,13 +16,13 @@ export default function TRPCProvider({
   const [queryClient] = useState(
     () =>
       new QueryClient({
-        // defaultOptions: {
-        //   queries: {
-        //     refetchOnMount: true,
-        //     refetchOnWindowFocus: true,
-        //     refetchOnReconnect: true,
-        //   },
-        // },
+        defaultOptions: {
+          queries: {
+            refetchOnMount: true,
+            refetchOnWindowFocus: true,
+            refetchOnReconnect: true,
+          },
+        },
       }),
   );
   const [trpcClient] = useState(() =>

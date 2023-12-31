@@ -1,0 +1,32 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSaveMode": "file",
+  "files.autoSave": "onFocusChange",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortMembers": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "prisma.fileWatcher": true,
+  "vitest.commandLine": "npm run test --",
+  "vitest.enable": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "REVIEW"],
+  "editor.inlineSuggest.enabled": true,
+  "files.exclude": {
+    ".gitbook": true,
+    ".gitlab": true,
+    ".sst": true,
+    ".yarn": true,
+    ".yarnrc.yml": true,
+    ".nvmrc": true,
+    ".gitpod.yml": true
+  }
+}

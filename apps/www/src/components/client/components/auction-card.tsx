@@ -9,7 +9,7 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 
-import { Auction, AuctionImage } from "@fleabay/db/schema";
+import { AuctionImage } from "@fleabay/db";
 
 import { BidInput } from "./bid-input";
 import Countdown from "./countdown";
@@ -22,12 +22,16 @@ const mockdata = [
 ];
 
 export function AuctionCard({
-  auction,
+  currentPrice,
+  endDate,
+  name,
+  description,
   images,
-  hasHighestBid,
-  hasBid,
 }: {
-  auction: Auction;
+  currentPrice: number;
+  endDate: Date;
+  name: string;
+  description?: string | null;
   images?: AuctionImage[];
   hasHighestBid?: boolean;
   hasBid?: boolean;
@@ -40,30 +44,30 @@ export function AuctionCard({
   ));
 
   const coverImage =
-    images?.[0]?.image?.url ?? "./images/auction-placeholder.jpg";
+    images?.[0]?.imageUrl ?? "./images/auction-placeholder.jpg";
 
   return (
     <Card withBorder radius="md" className={classes.card + " highest-bid"}>
       <Card.Section className={classes.imageSection}>
         <Group justify="center">
           <Badge variant="outline">
-            <Countdown endTime={auction.end_date} />
+            <Countdown endTime={endDate} />
           </Badge>
           <Image
             style={{
               borderRadius: "10px",
             }}
             src={coverImage}
-            alt={auction.name}
+            alt={name}
           />
         </Group>
       </Card.Section>
 
       <Group justify="space-between" mt="md">
         <div>
-          <Text fw={500}>{auction.name}</Text>
+          <Text fw={500}>{name}</Text>
           <Text fz="xs" c="dimmed">
-            {auction.description}
+            {description}
           </Text>
         </div>
       </Group>
@@ -79,7 +83,7 @@ export function AuctionCard({
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <BidInput auction={auction} />
+        <BidInput currentPrice={currentPrice} />
       </Card.Section>
     </Card>
   );

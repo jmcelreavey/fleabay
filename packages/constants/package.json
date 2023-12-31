@@ -9,6 +9,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@fleabay/db": "workspace:*"
+    "@fleabay/db": "workspace:*",
+    "@types/node": "^20.10.6"
   }
 }

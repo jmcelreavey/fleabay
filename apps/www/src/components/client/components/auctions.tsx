@@ -26,13 +26,17 @@ export default function Auctions() {
         </Text>
       ) : (
         <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4, xl: 5 }} spacing="xl">
-          {getAuctionsQuery.data.map((auction) => {
-            const { auction_images, ...rest } = auction;
+          {getAuctionsQuery.data.map((auction, i) => {
+            const { images, currentPrice, endDate, name, description } =
+              auction;
             return (
               <AuctionCard
-                auction={rest}
-                images={auction_images}
-                key={auction.id}
+                images={images}
+                key={i}
+                currentPrice={Number(currentPrice)}
+                endDate={endDate}
+                name={name}
+                description={description}
               />
             );
           })}

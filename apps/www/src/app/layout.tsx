@@ -17,7 +17,6 @@ import { getBaseUrl } from "@/trpc/shared";
 import TRPCProvider from "@/trpc/TRPCProvider";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 
 const font = Poppins({
@@ -113,7 +112,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             <TRPCProvider>
               <Notifications />
               <Providers>{children}</Providers>
-              <Analytics />
             </TRPCProvider>
           </SessionProvider>
         </MantineProvider>
