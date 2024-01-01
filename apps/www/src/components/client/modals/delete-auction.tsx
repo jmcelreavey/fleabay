@@ -2,42 +2,25 @@
 
 import { useEffect } from "react";
 import { api } from "@/trpc/client";
-import {
-  ActionIcon,
-  Alert,
-  Button,
-  Group,
-  Modal,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Alert, Button, Group, Modal, Stack, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
-import { IconAlertCircle, IconCheck, IconTrash } from "@tabler/icons-react";
+import { IconAlertCircle, IconCheck } from "@tabler/icons-react";
 
-export default function DeleteVoter({
-  voter,
-  election_id,
-}: {
-  voter: {
-    id: string;
-    email: string;
-  };
-  election_id: string;
-}) {
+import type { Auction } from "@fleabay/db";
+
+export default function DeleteAuction({ auction }: { auction: Auction }) {
   const context = api.useUtils();
   const [opened, { open, close }] = useDisclosure(false);
-
-  const deleteVoterMutation = api.voter.delete.useMutation({
+  const deleteAuctionMutation = api.auction.deleteSingle.useMutation({
     onSuccess: async () => {
-      await context.election.getVotersByElectionSlug.invalidate();
+      await context.auction.get.invalidate();
       notifications.show({
-        title: "Success!",
-        message: `Successfully deleted ${voter.email}`,
+        title: `${auction.name} deleted!`,
+        message: "Successfully deleted auction",
         icon: <IconCheck size="1.1rem" />,
         autoClose: 5000,
       });
-      close();
     },
     onError: (error) => {
       notifications.show({
@@ -51,58 +34,59 @@ export default function DeleteVoter({
 
   useEffect(() => {
     if (opened) {
-      deleteVoterMutation.reset();
+      deleteAuctionMutation.reset();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [opened]);
+
   return (
     <>
-      <ActionIcon
-        variant="outline"
+      <Button
+        onClick={open}
+        variant="light"
         color="red"
-        onClick={() => {
-          open();
-        }}
+        size="compact-sm"
+        w="fit-content"
       >
-        <IconTrash size="1rem" />
-      </ActionIcon>
+        Delete
+      </Button>
       <Modal
-        opened={opened || deleteVoterMutation.isPending}
+        opened={opened || deleteAuctionMutation.isPending}
         onClose={close}
-        title={<Text fw={600}>Confirm Delete Voter - {voter.email}</Text>}
+        title={<Text fw={600}>Confirm Delete Auction - {auction.name}</Text>}
       >
         <Stack gap="sm">
           <Stack>
-            <Text>Are you sure you want to delete this voter?</Text>
+            <Text>Are you sure you want to delete this auction?</Text>
             <Text>This action cannot be undone.</Text>
           </Stack>
-          {deleteVoterMutation.isError && (
+          {deleteAuctionMutation.isError && (
             <Alert
               icon={<IconAlertCircle size="1rem" />}
               color="red"
               title="Error"
               variant="filled"
             >
-              {deleteVoterMutation.error.message}
+              {deleteAuctionMutation.error.message}
             </Alert>
           )}
           <Group justify="right" gap="xs">
             <Button
               variant="default"
               onClick={close}
-              disabled={deleteVoterMutation.isPending}
+              disabled={deleteAuctionMutation.isPending}
             >
               Cancel
             </Button>
             <Button
               color="red"
-              loading={deleteVoterMutation.isPending}
+              loading={deleteAuctionMutation.isPending}
               onClick={() =>
-                deleteVoterMutation.mutate({
-                  election_id,
-                  id: voter.id,
+                deleteAuctionMutation.mutate({
+                  id: auction.id,
                 })
               }
+              type="submit"
             >
               Confirm Delete
             </Button>

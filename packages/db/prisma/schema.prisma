@@ -84,7 +84,7 @@ model Auction {
   highestBidId  Int?    @unique
 
   name         String
-  description  String?  @db.Text
+  description  String   @db.Text
   startDate    DateTime
   endDate      DateTime
   bidIncrement Decimal  @default(1) @db.Decimal(7, 2)

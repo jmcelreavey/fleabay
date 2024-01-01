@@ -7,10 +7,7 @@ import "@mantine/spotlight/styles.css";
 import "mantine-react-table/styles.css";
 
 import type { Metadata } from "next";
-import {
-  // Lexend,
-  Poppins,
-} from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { getBaseUrl } from "@/trpc/shared";
@@ -23,11 +20,6 @@ const font = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
-// const font = Lexend({
-//   subsets: ["latin"],
-// });
-
-// export const runtime = "edge";
 
 export const metadata: Metadata = {
   title: {
@@ -63,7 +55,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8443325162715161"
           crossOrigin="anonymous"
         ></script>
-        {/* TODO: Remove this once safari fix auto scale */}
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"

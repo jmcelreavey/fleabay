@@ -7,7 +7,7 @@ import Balancer from "react-wrap-balancer";
 import { AuctionCard } from "./auction-card";
 
 export default function Auctions() {
-  const getAuctionsQuery = api.auction.getAuctions.useQuery();
+  const getAuctionsQuery = api.auction.get.useQuery();
   return (
     <Stack>
       <Box>

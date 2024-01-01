@@ -48,8 +48,8 @@ export const userRouter = createTRPCRouter({
               )
           : input.image;
 
-        if (user.image_file && !image_file && !input.image)
-          await ctx.utapi.deleteFiles(user.image_file as string);
+        if (user.image && !image_file && !input.image)
+          await ctx.utapi.deleteFiles(user.image);
 
         await db.user.update({
           where: {
@@ -82,36 +82,39 @@ export const userRouter = createTRPCRouter({
       });
     }),
 
-  // deleteAccount: protectedProcedure.mutation(async ({ ctx }) => {
-  //   await ctx.db.$transaction(async (db) => {
-  //     const user = await db.user.findFirst({
-  //       where: {
-  //         id: ctx.session.user.id,
-  //       },
-  //     });
+  deleteAccount: protectedProcedure.mutation(async ({ ctx }) => {
+    await ctx.db.$transaction(async (db) => {
+      const user = await db.user.findFirst({
+        where: {
+          id: ctx.session.user.id,
+        },
+      });
 
-  //     if (!user) throw new TRPCError({ code: "NOT_FOUND" });
+      if (!user) throw new TRPCError({ code: "NOT_FOUND" });
 
-  //     const account = await db.account.findFirst({
-  //       where: {
-  //         userId: ctx.session.user.id,
-  //       },
-  //     });
+      const account = await db.account.findFirst({
+        where: {
+          userId: ctx.session.user.id,
+        },
+      });
 
-  //     if (!account) throw new TRPCError({ code: "NOT_FOUND" });
+      if (!account) throw new TRPCError({ code: "NOT_FOUND" });
 
-  //     await db.deleted_user.create({
-  //       data: {
-  //         ...user,
-  //       },
-  //     });
+      await db.user.delete({
+        where: {
+          id: ctx.session.user.id,
+        },
+      });
 
-  //     await db.delete(users).where(eq(users.id, ctx.session.user.id));
-  //     await db.delete(accounts).where(eq(accounts.userId, ctx.session.user.id));
-  //   });
+      await db.account.deleteMany({
+        where: {
+          userId: ctx.session.user.id,
+        },
+      });
+    });
 
-  //   return true;
-  // }),
+    return true;
+  }),
 
   //   checkPassword: protectedProcedure
   //     .input(

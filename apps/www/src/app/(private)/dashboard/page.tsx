@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import Dashboard from "@/components/client/layout/dashboard";
-import CreateElection from "@/components/client/modals/create-election";
+import CreateAuction from "@/components/client/modals/create-auction";
 import {
   Box,
   Container,
@@ -15,6 +15,8 @@ import {
 } from "@mantine/core";
 
 import { auth } from "@fleabay/auth";
+
+import Auctions from "../../../components/client/components/auctions";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -31,18 +33,18 @@ export default async function Page() {
       <Container size="md" my="md">
         <Stack gap="xl">
           <Box hiddenFrom="xs">
-            <CreateElection style={{ width: "100%" }} />
+            <CreateAuction style={{ width: "100%" }} />
           </Box>
           <Box>
             <Flex align="center" justify="space-between">
-              <Title order={2}>My elections</Title>
+              <Title order={2}>My auctions</Title>
 
               <Box visibleFrom="xs">
-                <CreateElection />
+                <CreateAuction />
               </Box>
             </Flex>
             <Text size="sm" c="grayText" mb="md">
-              You can manage the elections below.
+              You can manage the auctions below.
             </Text>
             <Group>
               <Suspense
@@ -53,17 +55,14 @@ export default async function Page() {
                     ))}
                   </>
                 }
-              ></Suspense>
+              >
+                <MyAuctions />
+              </Suspense>
             </Group>
           </Box>
 
           <Box>
-            <Title order={2}>My elections I can vote in</Title>
-
-            <Text size="sm" c="grayText" mb="sm">
-              You can vote in the elections below. You can only vote once per
-              election.
-            </Text>
+            <Title order={2}>Auctions</Title>
 
             <Group>
               <Suspense
@@ -74,7 +73,9 @@ export default async function Page() {
                     ))}
                   </>
                 }
-              ></Suspense>
+              >
+                <Auctions />
+              </Suspense>
             </Group>
           </Box>
         </Stack>
