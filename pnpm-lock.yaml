@@ -89,6 +89,9 @@ importers:
       '@mantine/tiptap':
         specifier: ^7.3.2
         version: 7.3.2(@mantine/core@7.3.2)(@mantine/hooks@7.3.2)(@tabler/icons-react@2.44.0)(@tiptap/extension-link@2.1.13)(react-dom@18.2.0)(react@18.2.0)
+      '@prisma/nextjs-monorepo-workaround-plugin':
+        specifier: ^5.7.1
+        version: 5.7.1
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -2435,6 +2438,10 @@ packages:
     resolution: {integrity: sha512-eDlswr3a1m5z9D/55Iyt/nZqS5UpD+DZ9MooBB3hvrcPhDQrcf9m4Tl7buy4mvAtrubQ626ECtb8c6L/f7rGSQ==}
     dependencies:
       '@prisma/debug': 5.7.1
+
+  /@prisma/nextjs-monorepo-workaround-plugin@5.7.1:
+    resolution: {integrity: sha512-imzkXQ/iNytpSHAEfXzI4eJcuwuJoBPPak4zuedyOYv6lQoOJ5/nFuW2V17GcumWaxb2qyWrr2NyX9iJvqgL5w==}
+    dev: false
 
   /@radix-ui/react-compose-refs@1.0.1(react@18.2.0):
     resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}

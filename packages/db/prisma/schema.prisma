@@ -6,6 +6,7 @@ datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
   relationMode = "prisma"
+  // use libquery_engine-rhel-openssl-1.0.x.so.node
 }
 
 model Account {
