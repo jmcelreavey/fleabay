@@ -37,7 +37,7 @@ export default async function Page() {
           </Box>
           <Box>
             <Flex align="center" justify="space-between">
-              <Title order={2}>My Auctions</Title>
+              <Title order={2}>Your Auctions</Title>
 
               <Box visibleFrom="xs">
                 <CreateAuction />

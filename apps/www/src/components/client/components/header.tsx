@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useStore } from "@/store";
 import classes from "@/styles/Header.module.css";
 import { api } from "@/trpc/client";
@@ -21,24 +20,18 @@ import {
   MenuDropdown,
   MenuItem,
   MenuTarget,
-  Pill,
   Skeleton,
   Text,
-  TextInput,
   UnstyledButton,
   useComputedColorScheme,
   useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { spotlight } from "@mantine/spotlight";
 import {
   IconChartBar,
   IconChevronDown,
   IconLogout,
-  IconMessage,
   IconMoon,
-  IconSearch,
-  IconSparkles,
   IconSun,
   IconUserCircle,
 } from "@tabler/icons-react";
@@ -46,7 +39,6 @@ import { signOut } from "next-auth/react";
 
 export default function Header({ userId }: { userId?: string }) {
   const session = api.auth.getSession.useQuery();
-  const params = useParams();
   const [logoutLoading, setLogoutLoading] = useState(false);
 
   const { setColorScheme } = useMantineColorScheme();
@@ -86,7 +78,6 @@ export default function Header({ userId }: { userId?: string }) {
               color="gray.6"
               py="xl"
               h="100%"
-              hidden={!params?.electionDashboardSlug}
             />
           </Center>
         </Flex>
@@ -99,27 +90,6 @@ export default function Header({ userId }: { userId?: string }) {
               xs: "lg",
             }}
           >
-            <TextInput
-              onClick={spotlight.open}
-              leftSection={<IconSearch size="1.25rem" />}
-              radius="xl"
-              w={140}
-              readOnly
-              placeholder="Search"
-              hiddenFrom="sm"
-              visibleFrom="xs"
-            />
-            <TextInput
-              onClick={spotlight.open}
-              leftSection={<IconSearch size="1.25rem" />}
-              rightSection={<Pill>Ctrl + K</Pill>}
-              radius="xl"
-              w={200}
-              readOnly
-              rightSectionWidth={80}
-              placeholder="Search"
-              visibleFrom="sm"
-            />
             <Menu
               position="bottom-end"
               opened={openedMenu}
@@ -207,14 +177,6 @@ export default function Header({ userId }: { userId?: string }) {
                 </MenuItem>
 
                 <MenuItem
-                  component={Link}
-                  href="/pricing"
-                  leftSection={<IconSparkles size={16} />}
-                >
-                  Pricing
-                </MenuItem>
-
-                <MenuItem
                   leftSection={
                     computedColorScheme === "light" ? (
                       <IconMoon size={16} />
@@ -255,16 +217,6 @@ export default function Header({ userId }: { userId?: string }) {
                 </MenuItem>
               </MenuDropdown>
             </Menu>
-            {params?.electionDashboardSlug && (
-              <ActionIcon
-                variant={store.dashboardChatMenu ? "light" : "subtle"}
-                hiddenFrom="lg"
-                size="lg"
-                onClick={() => store.toggleDashboardChatMenu()}
-              >
-                <IconMessage />
-              </ActionIcon>
-            )}
           </Flex>
         ) : (
           <Group gap="xs">

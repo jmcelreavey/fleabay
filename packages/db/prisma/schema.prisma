@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
@@ -126,7 +127,7 @@ model Bid {
   deletedAt         DateTime?
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
-  auction           Auction   @relation("AuctionToBids", fields: [auctionId], references: [id], map: "AuctionToBidsKey")
+  auction           Auction   @relation("AuctionToBids", fields: [auctionId], references: [id], map: "AuctionToBidsKey", onDelete: NoAction, onUpdate: NoAction)
   highestBidAuction Auction?  @relation("AuctionToHighestBid")
   buyer             Buyer     @relation(fields: [buyerId], references: [id])
 

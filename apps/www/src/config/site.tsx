@@ -1,14 +1,9 @@
-import {
-  IconDashboard,
-  IconHome,
-  IconSparkles,
-  IconUserCog,
-} from "@tabler/icons-react";
+import { IconDashboard, IconHome, IconUserCog } from "@tabler/icons-react";
 
 export const siteConfig = {
-  name: "FleaBay - Your One-Stop Online Voting Solution",
+  name: "FleaBay - Your One-Stop Online Auction Solution",
   description:
-    "Empower your elections with fleabay, the versatile and web-based voting platform that offers secure online elections for any type of organization.",
+    "Empower your auctions with fleabay, the versatile and web-based auction platform that offers secure online auctions for a variety of species.",
   url: "https://fleabay.northern.ie",
 };
 
@@ -25,7 +20,7 @@ export const SPOTLIGHT_DATA = [
   {
     id: "dashboard",
     label: "Dashboard",
-    description: "See your election that you are part of",
+    description: "See your auctions that you have created",
     link: "/dashboard",
     leftSection: <IconDashboard />,
   },
@@ -35,12 +30,5 @@ export const SPOTLIGHT_DATA = [
     description: "Change your account settings",
     leftSection: <IconUserCog />,
     link: "/account",
-  },
-  {
-    id: "pricing",
-    label: "Pricing",
-    description: "See our pricing plans",
-    leftSection: <IconSparkles />,
-    link: "/pricing",
   },
 ];
