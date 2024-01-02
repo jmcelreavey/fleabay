@@ -79,6 +79,5 @@
       "@fleabay/eslint-config/react"
     ]
   },
-  "prettier": "@fleabay/prettier-config",
-  "type": "module"
+  "prettier": "@fleabay/prettier-config"
 }
