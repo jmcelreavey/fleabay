@@ -19,8 +19,14 @@ export type OAuthProviders = (typeof providers)[number];
 declare module "next-auth" {
   interface Session {
     user: {
+      sellerId?: string;
+      buyerId?: string;
       id: string;
     } & DefaultSession["user"];
+  }
+
+  interface User {
+    id: string;
   }
 }
 
@@ -37,12 +43,26 @@ export const {
     }) as Provider,
   ],
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session: async ({ session, user }) => {
+      const existingUser = await db.user.findFirst({
+        where: {
+          id: user.id,
+        },
+        include: {
+          buyer: true,
+          seller: true,
+        },
+      });
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+          sellerId: existingUser?.seller?.id ?? undefined,
+          buyerId: existingUser?.buyer?.id ?? undefined,
+        },
+      };
+    },
   },
 });

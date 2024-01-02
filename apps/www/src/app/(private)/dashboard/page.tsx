@@ -30,21 +30,21 @@ export default async function Page() {
 
   return (
     <Dashboard>
-      <Container size="md" my="md">
+      <Container size="90%" my="md">
         <Stack gap="xl">
           <Box hiddenFrom="xs">
             <CreateAuction style={{ width: "100%" }} />
           </Box>
           <Box>
             <Flex align="center" justify="space-between">
-              <Title order={2}>My auctions</Title>
+              <Title order={2}>My Auctions</Title>
 
               <Box visibleFrom="xs">
                 <CreateAuction />
               </Box>
             </Flex>
             <Text size="sm" c="grayText" mb="md">
-              You can manage the auctions below.
+              You can manage your auctions below.
             </Text>
             <Group>
               <Suspense
@@ -56,14 +56,16 @@ export default async function Page() {
                   </>
                 }
               >
-                <MyAuctions />
+                <Auctions sellerId={session.user.sellerId} />
               </Suspense>
             </Group>
           </Box>
 
           <Box>
             <Title order={2}>Auctions</Title>
-
+            <Text size="sm" c="grayText" mb="md">
+              You can bid on other auctions below.
+            </Text>
             <Group>
               <Suspense
                 fallback={

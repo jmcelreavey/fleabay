@@ -9,7 +9,7 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 
-import { AuctionImage } from "@fleabay/db";
+import type { AuctionImage } from "@fleabay/db";
 
 import { BidInput } from "./bid-input";
 import Countdown from "./countdown";
@@ -49,7 +49,7 @@ export function AuctionCard({
   return (
     <Card withBorder radius="md" className={classes.card + " highest-bid"}>
       <Card.Section className={classes.imageSection}>
-        <Group justify="center">
+        <Group m={"sm"} justify="center">
           <Badge variant="outline">
             <Countdown endTime={endDate} />
           </Badge>

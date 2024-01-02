@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@tabler/icons-react": "^2.44.0",
+    "decimal.js": "^10.4.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {

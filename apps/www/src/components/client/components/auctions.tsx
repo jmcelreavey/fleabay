@@ -1,21 +1,18 @@
 "use client";
 
 import { api } from "@/trpc/client";
-import { Box, SimpleGrid, Skeleton, Stack, Text, Title } from "@mantine/core";
+import { SimpleGrid, Skeleton, Stack, Text } from "@mantine/core";
 import Balancer from "react-wrap-balancer";
 
 import { AuctionCard } from "./auction-card";
 
-export default function Auctions() {
-  const getAuctionsQuery = api.auction.get.useQuery();
-  return (
-    <Stack>
-      <Box>
-        <Title order={2} ta="center">
-          Current Auctions
-        </Title>
-      </Box>
+export default function Auctions({ sellerId }: { sellerId?: string }) {
+  const getAuctionsQuery = api.auction.get.useQuery({
+    sellerId,
+  });
 
+  return (
+    <Stack mt={"sm"}>
       {getAuctionsQuery.isLoading ? (
         <Skeleton height={400} />
       ) : !getAuctionsQuery.data || getAuctionsQuery.data.length === 0 ? (

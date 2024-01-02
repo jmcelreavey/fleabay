@@ -1,3 +1,6 @@
+import Decimal from "decimal.js";
+import { z } from "zod";
+
 export const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://www.fleabay.northern.ie"
@@ -9,6 +12,11 @@ export const parseHourTo12HourFormat = (hour: number) => {
   else if (hour === 12) return "12 PM";
   else return `${hour - 12} PM`;
 };
+
+export const DecimalZod = z.custom<Decimal>(
+  (value) => value instanceof Decimal,
+  { message: "Expected Decimal instance" },
+);
 
 export const FAQs: { id: string; question: string; answer: string }[] = [
   {

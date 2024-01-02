@@ -56,7 +56,7 @@ export default function EditAuction({
   const openRef = useRef<() => void>(null);
 
   const initialValues = {
-    startingPrice: Number(auction.startingPrice),
+    startingPrice: auction.startingPrice.toString(),
     name: auction.name,
     description: auction.description,
     date: [auction.startDate, auction.endDate] as [Date, Date],
@@ -77,7 +77,7 @@ export default function EditAuction({
   });
 
   const form = useForm<{
-    startingPrice: number;
+    startingPrice: string;
     name: string;
     description: string;
     date: [Date, Date];
@@ -86,7 +86,7 @@ export default function EditAuction({
     initialValues,
     validate: {
       startingPrice: (value) => {
-        if (value < 0) {
+        if (Number(value) < 0) {
           return "Starting price must be greater than 0";
         }
       },
@@ -222,7 +222,7 @@ export default function EditAuction({
                     {...form.getInputProps("date")}
                   />
                   <NumberInput
-                    label="Last name"
+                    label="Starting price"
                     placeholder="Enter starting price"
                     required
                     withAsterisk
@@ -230,9 +230,7 @@ export default function EditAuction({
                     leftSection={<IconCurrencyPound size="1rem" />}
                     disabled={editAuctionMutation.isPending}
                     onBlur={(e) => {
-                      const value = Number(
-                        parseFloat(e.target.value).toFixed(2),
-                      );
+                      const value = parseFloat(e.target.value).toFixed(2);
                       form.setFieldValue("startingPrice", value);
                     }}
                   />

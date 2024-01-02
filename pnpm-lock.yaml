@@ -125,6 +125,9 @@ importers:
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
+      decimal.js:
+        specifier: ^10.4.3
+        version: 10.4.3
       dotenv-cli:
         specifier: ^7.3.0
         version: 7.3.0
@@ -216,6 +219,9 @@ importers:
       '@trpc/server':
         specifier: next
         version: 11.0.0-alpha-next-2023-11-21-11-13-12.106
+      dayjs:
+        specifier: ^1.11.10
+        version: 1.11.10
       superjson:
         specifier: ^2.2.1
         version: 2.2.1
@@ -296,6 +302,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^2.44.0
         version: 2.44.0(react@18.2.0)
+      decimal.js:
+        specifier: ^10.4.3
+        version: 10.4.3
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -4364,6 +4373,10 @@ packages:
   /decamelize@1.2.0:
     resolution: {integrity: sha512-z2S+W9X73hAUUki+N+9Za2lBlun89zigOyGrsax+KUQ6wKW4ZoWpEYBkGhQjwAjjDCkWxhY0VKEhk8wzY7F5cA==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /decimal.js@10.4.3:
+    resolution: {integrity: sha512-VBBaLc1MgL5XpzgIP7ny5Z6Nx3UrRkIViUkPUdtl9aya5amy3De1gsUUSB1g3+3sExYNjCAsAznmukyxCb1GRA==}
     dev: false
 
   /decompress-response@6.0.0:

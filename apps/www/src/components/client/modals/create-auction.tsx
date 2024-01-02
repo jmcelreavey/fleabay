@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import classes from "@/styles/Auction.module.css";
 import { api } from "@/trpc/client";
 import { transformUploadImage } from "@/utils";
+import type { MantineStyleProp } from "@mantine/core";
 import {
   Alert,
   Box,
@@ -21,12 +21,11 @@ import {
   TabsTab,
   Text,
   TextInput,
-  UnstyledButton,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import type { FileWithPath } from "@mantine/dropzone";
 import { Dropzone, DropzoneReject, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { hasLength, useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
 import {
@@ -36,13 +35,14 @@ import {
   IconCurrencyPound,
   IconLetterCase,
   IconPhoto,
-  IconUserPlus,
+  IconPlus,
   IconUserSearch,
   IconX,
 } from "@tabler/icons-react";
 import dayjs from "dayjs";
+import { z } from "zod";
 
-export default function CreateAuction() {
+export default function CreateAuction({ style }: { style?: MantineStyleProp }) {
   const context = api.useUtils();
   const [opened, { open, close }] = useDisclosure(false);
   const openRef = useRef<() => void>(null);
@@ -70,54 +70,54 @@ export default function CreateAuction() {
   });
 
   const form = useForm<{
-    startingPrice: number;
+    startingPrice: string;
     name: string;
     description: string;
     date: [Date, Date];
     images: FileWithPath[] | null;
   }>({
+    validateInputOnBlur: true,
     initialValues: {
-      startingPrice: 0,
+      startingPrice: "0.00",
       name: "",
       description: "",
       date: [new Date(), dayjs().add(7, "day").toDate()],
       images: null,
     },
-    validate: {
-      startingPrice: (value) => {
-        if (value < 0) {
-          return "Starting price must be greater than 0";
-        }
-      },
-      name: hasLength({ min: 1 }, "Name must be at least 1 characters"),
-      description: hasLength(
-        { min: 1 },
-        "Description must be at least 1 characters",
-      ),
-      date: (value) => {
-        const [startDate, endDate] = value;
-
-        if (!startDate || !endDate) {
-          return "Start date and end date are required";
-        }
-
-        if (dayjs(startDate).isAfter(endDate)) {
-          return "Start date must be before end date";
-        }
-
-        if (dayjs(startDate).isBefore(dayjs())) {
-          return "Start date must be after today";
-        }
-
-        if (dayjs(startDate).isSame(endDate)) {
-          return "Start date and end date cannot be the same";
-        }
-
-        if (dayjs(startDate).isAfter(endDate)) {
-          return "Start date must be before end date";
-        }
-      },
-    },
+    validate: zodResolver(
+      z.object({
+        startingPrice: z
+          .string()
+          .refine(
+            (value) => !isNaN(parseFloat(value)),
+            "Starting price must be a valid number",
+          )
+          .refine(
+            (value) => parseFloat(value) > 0,
+            "Starting price must be greater than 0",
+          ),
+        name: z.string().min(1),
+        description: z.string().min(1),
+        date: z
+          .tuple([z.date(), z.date()])
+          .refine(
+            (value) => value[0].getTime() < value[1].getTime(),
+            "Start date must be before end date",
+          )
+          .refine(
+            (value) => !dayjs(value[0]).isSame(dayjs(value[1])),
+            "Start date and end date cannot be the same",
+          )
+          .refine(
+            (value) => dayjs(value[0]).isAfter(dayjs().subtract(1, "day")),
+            "Start date must be in the future",
+          )
+          .refine(
+            (value) => dayjs(value[1]).isAfter(dayjs().subtract(1, "day")),
+            "End date must be in the future",
+          ),
+      }),
+    ),
   });
 
   useEffect(() => {
@@ -130,17 +130,13 @@ export default function CreateAuction() {
 
   return (
     <>
-      <UnstyledButton
+      <Button
         onClick={open}
-        className={classes["create-auction-button"]}
+        style={style}
+        leftSection={<IconPlus size="1.25rem" />}
       >
-        <IconUserPlus />
-
-        <Box>
-          <Text>Add</Text>
-          <Text visibleFrom="sm"> auction</Text>
-        </Box>
-      </UnstyledButton>
+        Create Auction
+      </Button>
 
       <Modal
         opened={opened || createAuctionMutation.isPending}
@@ -190,6 +186,7 @@ export default function CreateAuction() {
               <TabsPanel value="basic-info" pt="xs">
                 <Stack gap="xs">
                   <TextInput
+                    data-autofocus
                     label="Name"
                     placeholder="Enter name"
                     required
@@ -201,6 +198,8 @@ export default function CreateAuction() {
 
                   <TextInput
                     label="Description"
+                    required
+                    withAsterisk
                     placeholder="Enter description"
                     {...form.getInputProps("description")}
                     leftSection={<IconLetterCase size="1rem" />}
@@ -212,26 +211,21 @@ export default function CreateAuction() {
                     label="Auction start and end date"
                     description="You can't change the auction date once the auction has started."
                     leftSection={<IconCalendar size="1rem" />}
-                    minDate={
-                      new Date(new Date().setDate(new Date().getDate() + 1))
-                    }
                     firstDayOfWeek={0}
                     required
                     disabled={createAuctionMutation.isPending}
                     {...form.getInputProps("date")}
                   />
                   <NumberInput
-                    label="Last name"
+                    label="Starting price"
                     placeholder="Enter starting price"
                     required
                     withAsterisk
                     {...form.getInputProps("startingPrice")}
                     leftSection={<IconCurrencyPound size="1rem" />}
                     disabled={createAuctionMutation.isPending}
-                    onBlur={(e) => {
-                      const value = Number(
-                        parseFloat(e.target.value).toFixed(2),
-                      );
+                    onChange={(e) => {
+                      const value = parseFloat(e.toString()).toFixed(2);
                       form.setFieldValue("startingPrice", value);
                     }}
                   />

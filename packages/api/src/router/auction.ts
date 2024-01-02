@@ -1,38 +1,60 @@
 import { TRPCError } from "@trpc/server";
+import dayjs from "dayjs";
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const auctionRouter = createTRPCRouter({
-  get: publicProcedure.query(async ({ ctx }) => {
-    const auctions = await ctx.db.auction.findMany({
-      select: {
-        startingPrice: true,
-        name: true,
-        description: true,
-        endDate: true,
-        images: true,
-        highestBid: true,
-      },
-    });
+  get: publicProcedure
+    .input(
+      z.object({
+        sellerId: z.string().nullish(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const auctions = await ctx.db.auction.findMany({
+        select: {
+          startingPrice: true,
+          name: true,
+          description: true,
+          endDate: true,
+          images: true,
+          highestBid: true,
+        },
+        where: {
+          sellerId: input.sellerId ?? undefined,
+          endDate: {
+            gt: new Date(),
+          },
+        },
+      });
 
-    const auctionWithCurrentPrice = auctions.map((auction) => {
-      const currentPrice = auction.highestBid
-        ? auction.highestBid.amount
-        : auction.startingPrice;
-      return { ...auction, currentPrice };
-    });
+      const auctionWithCurrentPrice = auctions.map((auction) => {
+        const currentPrice = auction.highestBid
+          ? auction.highestBid.amount
+          : auction.startingPrice;
+        return { ...auction, currentPrice };
+      });
 
-    return auctionWithCurrentPrice;
-  }),
+      return auctionWithCurrentPrice;
+    }),
   createSingle: protectedProcedure
     .input(
       z
         .object({
-          startingPrice: z.number().min(1),
+          startingPrice: z
+            .string()
+            .refine(
+              (value) => !isNaN(parseFloat(value)),
+              "Starting price must be a valid number",
+            )
+            .refine(
+              (value) => parseFloat(value) > 0,
+              "Starting price must be greater than 0",
+            ),
           name: z.string().min(1),
           description: z.string().min(1),
-          startDate: z.date().min(new Date()),
+          startDate: z.date().min(dayjs().subtract(1, "day").toDate()),
           endDate: z.date(),
           images: z
             .array(
@@ -73,7 +95,16 @@ export const auctionRouter = createTRPCRouter({
       z
         .object({
           id: z.number(),
-          startingPrice: z.number().min(1),
+          startingPrice: z
+            .string()
+            .refine(
+              (value) => !isNaN(parseFloat(value)),
+              "Starting price must be a valid number",
+            )
+            .refine(
+              (value) => parseFloat(value) > 0,
+              "Starting price must be greater than 0",
+            ),
           name: z.string().min(1),
           description: z.string().min(1),
           startDate: z.date().min(new Date()),
