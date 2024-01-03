@@ -3,7 +3,7 @@ import { IconDashboard, IconHome, IconUserCog } from "@tabler/icons-react";
 export const siteConfig = {
   name: "FleaBay - Your One-Stop Online Auction Solution",
   description:
-    "Empower your auctions with fleabay, the versatile and web-based auction platform that offers secure online auctions for a variety of species.",
+    "Empower your auctions with fleabay, the versatile and web-based auction platform that offers secure online auctions for a variety of livestock species.",
   url: "https://fleabay.northern.ie",
 };
 

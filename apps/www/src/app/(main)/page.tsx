@@ -46,7 +46,7 @@ export default async function HomePage() {
                 <Balancer>
                   Sell your livestock with fleabay, the versatile and web-based
                   auction platform that offers secure online auctions for a
-                  variety of livestock.
+                  variety of livestock species.
                 </Balancer>
               </Text>
             </Container>
