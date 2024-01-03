@@ -1,8 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button, NumberInput, Text } from "@mantine/core";
+import { useForm, zodResolver } from "@mantine/form";
+import { IconCurrencyPound } from "@tabler/icons-react";
 import type { Session } from "next-auth";
+import { z } from "zod";
 
 import { api } from "../../../trpc/client";
 
@@ -22,7 +25,6 @@ export const BidInput = ({
   isOutBid?: boolean;
 }) => {
   const fixedValue = Number(currentPrice).toFixed(2);
-  const [value, setValue] = useState(fixedValue);
   const context = api.useUtils();
   const bidMutation = api.auction.bid.useMutation({
     onSuccess: () => {
@@ -30,31 +32,64 @@ export const BidInput = ({
     },
   });
 
+  const form = useForm<{
+    bidAmount: string;
+  }>({
+    validateInputOnBlur: true,
+    initialValues: {
+      bidAmount: fixedValue,
+    },
+    validate: zodResolver(
+      z.object({
+        bidAmount: z
+          .string()
+          .refine(
+            (value) => !isNaN(parseFloat(value)),
+            "Starting price must be a valid number",
+          )
+          .refine(
+            (value) => parseFloat(value) >= currentPrice,
+            "You can't bid less than the current price",
+          ),
+      }),
+    ),
+  });
+
   useEffect(() => {
-    if (Number(currentPrice) > Number(value)) {
-      setValue(fixedValue);
+    if (Number(fixedValue) > Number(form.values.bidAmount)) {
+      form.setFieldValue("bidAmount", fixedValue);
     }
-  }, [currentPrice]);
+
+    if (isOutBid) {
+      form.setFieldError("bidAmount", "You have been outbid");
+    }
+  }, [fixedValue, isOutBid]);
 
   return (
-    <>
+    <form
+      onSubmit={form.onSubmit((values) => {
+        void (async () => {
+          await bidMutation.mutateAsync({
+            auctionId,
+            amount: values.bidAmount,
+          });
+        })();
+      })}
+    >
       <NumberInput
         radius="sm"
         size="sm"
         width={20}
         placeholder="Place Bid"
-        leftSection={<div>£</div>}
-        defaultValue={value}
-        value={value}
+        required
+        {...form.getInputProps("bidAmount")}
+        leftSection={<IconCurrencyPound size="1rem" />}
+        min={Number(currentPrice)}
         step={Number(increment)}
         disabled={isHighestBidder || bidMutation.isPending}
-        error={isOutBid ? "You have been outbid" : undefined}
-        onChange={(value) => {
-          if (value < currentPrice.toString()) {
-            setValue(fixedValue);
-          } else {
-            setValue(Number(value).toFixed(2));
-          }
+        onChange={(e) => {
+          const value = parseFloat(e.toString()).toFixed(2);
+          form.setFieldValue("bidAmount", value);
         }}
         rightSectionWidth={80}
         rightSection={
@@ -62,16 +97,10 @@ export const BidInput = ({
             <Button
               loading={bidMutation.isPending}
               disabled={bidMutation.isPending}
-              onClick={() => {
-                if (!session?.user) return;
-                void bidMutation.mutateAsync({
-                  auctionId,
-                  amount: value,
-                });
-              }}
               style={{ flex: 1 }}
-              component="a"
-              href={!session?.user ? "/sign-in" : undefined}
+              {...(!session?.user
+                ? { component: "a", href: "/sign-in" }
+                : { type: "submit" })}
             >
               Bid
             </Button>
@@ -83,6 +112,6 @@ export const BidInput = ({
           You are the highest bidder.
         </Text>
       )}
-    </>
+    </form>
   );
 };

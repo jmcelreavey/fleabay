@@ -13,9 +13,7 @@ export default function Auctions({ sellerId }: { sellerId?: string }) {
       sellerId,
     },
     {
-      staleTime: 1000,
       refetchInterval: 1000,
-      refetchIntervalInBackground: true,
       refetchOnReconnect: true,
       refetchOnWindowFocus: true,
       refetchOnMount: true,
