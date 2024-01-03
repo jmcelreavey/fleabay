@@ -47,7 +47,7 @@ export default function CreateAuction({ style }: { style?: MantineStyleProp }) {
   const [opened, { open, close }] = useDisclosure(false);
   const openRef = useRef<() => void>(null);
 
-  const createAuctionMutation = api.auction.createSingle.useMutation({
+  const createAuctionMutation = api.auction.create.useMutation({
     onSuccess: async () => {
       await context.auction.get.invalidate();
       notifications.show({

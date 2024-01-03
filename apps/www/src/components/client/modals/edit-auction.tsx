@@ -63,7 +63,7 @@ export default function EditAuction({
     images: null,
   };
 
-  const editAuctionMutation = api.auction.editSingle.useMutation({
+  const editAuctionMutation = api.auction.edit.useMutation({
     onSuccess: async () => {
       await context.auction.get.invalidate();
       notifications.show({

@@ -23,7 +23,6 @@ export const userRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      console.log(input);
       const user = await ctx.db.user.findFirst({
         where: {
           id: ctx.session.user.id,

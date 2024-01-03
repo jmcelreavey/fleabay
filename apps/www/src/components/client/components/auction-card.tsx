@@ -8,6 +8,7 @@ import {
   IconManualGearbox,
   IconUsers,
 } from "@tabler/icons-react";
+import type { Session } from "next-auth/types";
 
 import type { AuctionImage } from "@fleabay/db";
 
@@ -22,19 +23,29 @@ const mockdata = [
 ];
 
 export function AuctionCard({
+  session,
+  id,
   currentPrice,
   endDate,
   name,
   description,
   images,
+  isHighestBidder,
+  isOwner,
+  isOutbid,
+  bidIncrement,
 }: {
+  session: Session | null;
+  id: number;
   currentPrice: number;
   endDate: Date;
   name: string;
-  description?: string | null;
+  description: string;
   images?: AuctionImage[];
-  hasHighestBid?: boolean;
-  hasBid?: boolean;
+  isHighestBidder: boolean;
+  isOwner: boolean;
+  isOutbid: boolean;
+  bidIncrement: string;
 }) {
   const features = mockdata.map((feature) => (
     <Center key={feature.label}>
@@ -47,7 +58,7 @@ export function AuctionCard({
     images?.[0]?.imageUrl ?? "./images/auction-placeholder.jpg";
 
   return (
-    <Card withBorder radius="md" className={classes.card + " highest-bid"}>
+    <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
         <Group m={"sm"} justify="center">
           <Badge variant="outline">
@@ -77,14 +88,33 @@ export function AuctionCard({
           brief description
         </Text>
 
-        <Group gap={8} mb={-8}>
-          {features}
-        </Group>
+        <Group gap={8}>{features}</Group>
       </Card.Section>
 
-      <Card.Section className={classes.section}>
-        <BidInput currentPrice={currentPrice} />
-      </Card.Section>
+      {!isOwner && (
+        <Card.Section className={classes.section}>
+          <BidInput
+            session={session}
+            auctionId={id}
+            currentPrice={currentPrice}
+            increment={bidIncrement}
+            isHighestBidder={isHighestBidder}
+            isOutBid={isOutbid}
+          />
+        </Card.Section>
+      )}
+
+      {isOwner && (
+        <Card.Section className={classes.section}>
+          <Text fz="sm" c="dimmed" className={classes.label}>
+            current price
+          </Text>
+
+          <Text size="md" fw={500}>
+            £{currentPrice.toFixed(2)}
+          </Text>
+        </Card.Section>
+      )}
     </Card>
   );
 }

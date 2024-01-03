@@ -44,7 +44,6 @@
     "@trpc/server": "next",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
-    "decimal.js": "^10.4.3",
     "dotenv-cli": "^7.3.0",
     "mantine-form-zod-resolver": "^1.0.0",
     "mantine-react-table": "2.0.0-alpha.9",

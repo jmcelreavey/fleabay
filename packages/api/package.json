@@ -17,6 +17,7 @@
     "@trpc/client": "next",
     "@trpc/server": "next",
     "dayjs": "^1.11.10",
+    "decimal.js": "^10.4.3",
     "superjson": "^2.2.1",
     "uploadthing": "^6.1.0",
     "zod": "^3.22.4"

@@ -7,9 +7,28 @@ import Balancer from "react-wrap-balancer";
 import { AuctionCard } from "./auction-card";
 
 export default function Auctions({ sellerId }: { sellerId?: string }) {
-  const getAuctionsQuery = api.auction.get.useQuery({
-    sellerId,
-  });
+  const sessionQuery = api.auth.getSession.useQuery();
+  const getAuctionsQuery = api.auction.get.useQuery(
+    {
+      sellerId,
+    },
+    {
+      staleTime: 1000,
+      refetchInterval: 1000,
+      refetchIntervalInBackground: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: true,
+      refetchOnMount: true,
+    },
+  );
+
+  const NoAuctionsMessage = () => {
+    if (sellerId) {
+      return "You have no auctions.";
+    } else {
+      return "There are no auctions at the moment. Please check back later.";
+    }
+  };
 
   return (
     <Stack mt={"sm"}>
@@ -18,7 +37,7 @@ export default function Auctions({ sellerId }: { sellerId?: string }) {
       ) : !getAuctionsQuery.data || getAuctionsQuery.data.length === 0 ? (
         <Text ta="center">
           <Balancer>
-            There are no auctions at the moment. Please check back later.
+            <NoAuctionsMessage />
           </Balancer>
         </Text>
       ) : (
@@ -28,6 +47,12 @@ export default function Auctions({ sellerId }: { sellerId?: string }) {
               auction;
             return (
               <AuctionCard
+                id={auction.id}
+                session={sessionQuery?.data ?? null}
+                isHighestBidder={auction.isHighestBidder}
+                isOwner={auction.isOwner}
+                isOutbid={auction.isOutbid}
+                bidIncrement={auction.bidIncrement.toString()}
                 images={images}
                 key={i}
                 currentPrice={Number(currentPrice)}

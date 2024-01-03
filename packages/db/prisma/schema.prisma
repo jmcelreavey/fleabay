@@ -82,7 +82,6 @@ model Auction {
   id            Int     @id @default(autoincrement())
   startingPrice Decimal @db.Decimal(7, 2)
   sellerId      String
-  highestBidId  Int?    @unique
 
   name         String
   description  String   @db.Text
@@ -90,13 +89,12 @@ model Auction {
   endDate      DateTime
   bidIncrement Decimal  @default(1) @db.Decimal(7, 2)
 
-  deletedAt  DateTime?
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
-  images     AuctionImage[]
-  bids       Bid[]          @relation("AuctionToBids")
-  highestBid Bid?           @relation("AuctionToHighestBid", fields: [highestBidId], references: [id])
-  seller     Seller         @relation(fields: [sellerId], references: [id])
+  deletedAt DateTime?
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  images    AuctionImage[]
+  bids      Bid[]          @relation("AuctionToBids")
+  seller    Seller         @relation(fields: [sellerId], references: [id])
 
   @@index([startDate, endDate])
   @@index([sellerId])
@@ -124,12 +122,11 @@ model Bid {
 
   amount Decimal @db.Decimal(7, 2)
 
-  deletedAt         DateTime?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-  auction           Auction   @relation("AuctionToBids", fields: [auctionId], references: [id], map: "AuctionToBidsKey", onDelete: NoAction, onUpdate: NoAction)
-  highestBidAuction Auction?  @relation("AuctionToHighestBid")
-  buyer             Buyer     @relation(fields: [buyerId], references: [id])
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  auction   Auction   @relation("AuctionToBids", fields: [auctionId], references: [id], map: "AuctionToBidsKey")
+  buyer     Buyer     @relation(fields: [buyerId], references: [id])
 
   @@index([amount])
   @@index([buyerId])

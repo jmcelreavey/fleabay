@@ -56,7 +56,7 @@ export default async function Page() {
                   </>
                 }
               >
-                <Auctions sellerId={session.user.sellerId} />
+                <Auctions sellerId={session.user.sellerId ?? "-1"} />
               </Suspense>
             </Group>
           </Box>

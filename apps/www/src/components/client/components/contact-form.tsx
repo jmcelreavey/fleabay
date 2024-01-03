@@ -44,7 +44,7 @@ export default function ContactForm() {
     <Paper radius="lg" withBorder p="sm">
       <Flex direction={{ base: "column", sm: "row" }}>
         <div className={classes.contacts}>
-          <Text fz="lg" fw={700} className={classes["title-parent"]} c="#fff">
+          <Text fz="lg" fw={700} className={classes["title-parent"]}>
             Contact information
           </Text>
 
@@ -57,17 +57,17 @@ export default function ContactForm() {
               },
               {
                 title: "Phone",
-                description: "+63 961 719 6607",
+                description: "+44 123 456 7890",
                 icon: IconPhone,
               },
               {
                 title: "Address",
-                description: "Philippines",
+                description: "Lurgan, Northern Ireland",
                 icon: IconMapPin,
               },
               {
                 title: "Working hours",
-                description: "10AM – 7PM (PHT)",
+                description: "8AM - 5PM (GMT)",
                 icon: IconSun,
               },
             ].map((item, index) => (
