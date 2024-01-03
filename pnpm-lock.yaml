@@ -128,9 +128,6 @@ importers:
       dayjs:
         specifier: ^1.11.10
         version: 1.11.10
-      decimal.js:
-        specifier: ^10.4.3
-        version: 10.4.3
       dotenv-cli:
         specifier: ^7.3.0
         version: 7.3.0
