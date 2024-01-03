@@ -12,7 +12,10 @@ import {
 } from "@mantine/core";
 import Balancer from "react-wrap-balancer";
 
-export default function HomePage() {
+import { auth } from "@fleabay/auth";
+
+export default async function HomePage() {
+  const session = await auth();
   return (
     <Container size="90%" pos="relative" pb={80}>
       <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
@@ -23,55 +26,57 @@ export default function HomePage() {
       <Dots className={classes.dots} style={{ right: 60, top: 0 }} />
 
       <Stack>
-        <Box pos="relative" py={52}>
-          <Title
-            ta={{ base: "left", sm: "center" }}
-            fz={{ base: "2.25rem", sm: "3rem" }}
-            mb="md"
-            lts={-1}
-            className={classes.title}
-          >
-            <Balancer>Udderly Unbelievable Deals</Balancer>
-          </Title>
-
-          <Container p={0} size="md">
-            <Text
-              fz={{ base: "md", sm: "lg", md: "xl" }}
+        {!session?.user && (
+          <Box pos="relative" py={52}>
+            <Title
               ta={{ base: "left", sm: "center" }}
+              fz={{ base: "2.25rem", sm: "3rem" }}
+              mb="md"
+              lts={-1}
+              className={classes.title}
             >
-              <Balancer>
-                Sell your livestock with fleabay, the versatile and web-based
-                auction platform that offers secure online auctions for a
-                variety of livestock.
-              </Balancer>
-            </Text>
-          </Container>
+              <Balancer>Udderly Unbelievable Deals</Balancer>
+            </Title>
 
-          <Flex
-            justify="center"
-            mt="lg"
-            gap="sm"
-            direction={{ base: "column", sm: "row" }}
-          >
-            <Button
-              component={Link}
-              href="/sign-in"
-              className={classes.control}
-              size="md"
-              variant="outline"
+            <Container p={0} size="md">
+              <Text
+                fz={{ base: "md", sm: "lg", md: "xl" }}
+                ta={{ base: "left", sm: "center" }}
+              >
+                <Balancer>
+                  Sell your livestock with fleabay, the versatile and web-based
+                  auction platform that offers secure online auctions for a
+                  variety of livestock.
+                </Balancer>
+              </Text>
+            </Container>
+
+            <Flex
+              justify="center"
+              mt="lg"
+              gap="sm"
+              direction={{ base: "column", sm: "row" }}
             >
-              Sign in
-            </Button>
-            <Button
-              component={Link}
-              href="/register"
-              className={classes.control}
-              size="md"
-            >
-              Get started
-            </Button>
-          </Flex>
-        </Box>
+              <Button
+                component={Link}
+                href="/sign-in"
+                className={classes.control}
+                size="md"
+                variant="outline"
+              >
+                Sign in
+              </Button>
+              <Button
+                component={Link}
+                href="/register"
+                className={classes.control}
+                size="md"
+              >
+                Get started
+              </Button>
+            </Flex>
+          </Box>
+        )}
 
         <Stack gap="xl" id="auctions">
           <Auctions />

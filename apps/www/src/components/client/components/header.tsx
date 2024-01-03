@@ -71,14 +71,16 @@ export default function Header({ userId }: { userId?: string }) {
           </UnstyledButton>
 
           <Center h="100%" hiddenFrom="xs">
-            <Burger
-              opened={store.dashboardMenu}
-              onClick={() => store.toggleDashboardMenu()}
-              size="sm"
-              color="gray.6"
-              py="xl"
-              h="100%"
-            />
+            {session.data?.user && (
+              <Burger
+                opened={store.dashboardMenu}
+                onClick={() => store.toggleDashboardMenu()}
+                size="sm"
+                color="gray.6"
+                py="xl"
+                h="100%"
+              />
+            )}
           </Center>
         </Flex>
 
