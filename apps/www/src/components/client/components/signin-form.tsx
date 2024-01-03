@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
 // import { useParams } from "next/navigation";
 import { Anchor, Button, Paper, Stack, Text } from "@mantine/core";
 import { signIn } from "next-auth/react";
@@ -82,7 +82,7 @@ export default function SigninForm() {
           <TextInput
             required
             label="Email"
-            placeholder="brice@fleabay.com"
+            placeholder="support@fleabay.com"
             disabled
           />
 

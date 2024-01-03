@@ -93,7 +93,7 @@ export default function RegisterForm() {
           <TextInput
             required
             label="Email"
-            placeholder="brice@fleabay.com"
+            placeholder="support@fleabay.com"
             disabled
           />
           <Button disabled>Send magic link (soon)</Button>

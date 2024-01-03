@@ -108,7 +108,7 @@ export default function ContactForm() {
               />
               <TextInput
                 label="Email Address"
-                placeholder="brice@bricesuazo.com"
+                placeholder="james@bond.com"
                 w="100%"
                 disabled={false}
                 required
