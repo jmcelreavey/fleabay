@@ -49,11 +49,11 @@ export const BidInput = ({
         step={Number(increment)}
         disabled={isHighestBidder || bidMutation.isPending}
         error={isOutBid ? "You have been outbid" : undefined}
-        onBlur={(value) => {
-          if (value.currentTarget.value < currentPrice.toString()) {
+        onChange={(value) => {
+          if (value < currentPrice.toString()) {
             setValue(fixedValue);
           } else {
-            setValue(Number(value.currentTarget.value).toFixed(2));
+            setValue(Number(value).toFixed(2));
           }
         }}
         rightSectionWidth={80}
