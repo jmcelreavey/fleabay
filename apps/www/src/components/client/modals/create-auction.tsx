@@ -49,7 +49,7 @@ export default function CreateAuction({ style }: { style?: MantineStyleProp }) {
 
   const createAuctionMutation = api.auction.create.useMutation({
     onSuccess: async () => {
-      await context.auction.get.invalidate();
+      await context.auction.getAll.invalidate();
       notifications.show({
         title: `${form.values.name} created!`,
         message: "Successfully created auction",

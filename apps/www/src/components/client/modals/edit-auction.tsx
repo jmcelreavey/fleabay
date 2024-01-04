@@ -65,7 +65,7 @@ export default function EditAuction({
 
   const editAuctionMutation = api.auction.edit.useMutation({
     onSuccess: async () => {
-      await context.auction.get.invalidate();
+      await context.auction.getAll.invalidate();
       notifications.show({
         title: `${form.values.name} created!`,
         message: `Successfully updated auction: ${form.values.name}`,

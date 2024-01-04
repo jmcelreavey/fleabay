@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Auctions from "@/components/client/components/auctions";
+import Auctions from "@/components/client/components/auctions/auctions";
 import classes from "@/styles/Home.module.css";
 import {
   Box,

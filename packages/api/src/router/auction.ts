@@ -8,7 +8,7 @@ import type { Auction, Bid, Buyer, Seller } from "@fleabay/db";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const auctionRouter = createTRPCRouter({
-  get: publicProcedure
+  getAll: publicProcedure
     .input(
       z.object({
         sellerId: z.string().nullish(),

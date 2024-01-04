@@ -1,14 +1,16 @@
 "use client";
 
+import { useEffect } from "react";
 import { api } from "@/trpc/client";
 import { SimpleGrid, Skeleton, Stack, Text } from "@mantine/core";
 import Balancer from "react-wrap-balancer";
 
 import { AuctionCard } from "./auction-card";
+import { useAuctionStore } from "./auction-store";
 
 export default function Auctions({ sellerId }: { sellerId?: string }) {
-  const sessionQuery = api.auth.getSession.useQuery();
-  const getAuctionsQuery = api.auction.get.useQuery(
+  const { setAuctions } = useAuctionStore();
+  const getAuctionsQuery = api.auction.getAll.useQuery(
     {
       sellerId,
     },
@@ -19,6 +21,12 @@ export default function Auctions({ sellerId }: { sellerId?: string }) {
       refetchOnMount: true,
     },
   );
+
+  useEffect(() => {
+    if (getAuctionsQuery.data) {
+      setAuctions(getAuctionsQuery.data);
+    }
+  }, [getAuctionsQuery.data]);
 
   const NoAuctionsMessage = () => {
     if (sellerId) {
@@ -41,24 +49,7 @@ export default function Auctions({ sellerId }: { sellerId?: string }) {
       ) : (
         <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4, xl: 5 }} spacing="xl">
           {getAuctionsQuery.data.map((auction, i) => {
-            const { images, currentPrice, endDate, name, description } =
-              auction;
-            return (
-              <AuctionCard
-                id={auction.id}
-                session={sessionQuery?.data ?? null}
-                isHighestBidder={auction.isHighestBidder}
-                isOwner={auction.isOwner}
-                isOutbid={auction.isOutbid}
-                bidIncrement={auction.bidIncrement.toString()}
-                images={images}
-                key={i}
-                currentPrice={Number(currentPrice)}
-                endDate={endDate}
-                name={name}
-                description={description}
-              />
-            );
+            return <AuctionCard id={auction.id} key={i} />;
           })}
         </SimpleGrid>
       )}

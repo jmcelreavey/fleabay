@@ -14,7 +14,7 @@ export default function DeleteAuction({ auction }: { auction: Auction }) {
   const [opened, { open, close }] = useDisclosure(false);
   const deleteAuctionMutation = api.auction.deleteSingle.useMutation({
     onSuccess: async () => {
-      await context.auction.get.invalidate();
+      await context.auction.getAll.invalidate();
       notifications.show({
         title: `${auction.name} deleted!`,
         message: "Successfully deleted auction",

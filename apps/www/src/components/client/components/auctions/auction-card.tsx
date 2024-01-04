@@ -8,12 +8,10 @@ import {
   IconManualGearbox,
   IconUsers,
 } from "@tabler/icons-react";
-import type { Session } from "next-auth/types";
 
-import type { AuctionImage } from "@fleabay/db";
-
+import Countdown from "../countdown";
+import { useAuctionStore } from "./auction-store";
 import { BidInput } from "./bid-input";
-import Countdown from "./countdown";
 
 const mockdata = [
   { label: "4 passengers", icon: IconUsers },
@@ -22,31 +20,14 @@ const mockdata = [
   { label: "Electric", icon: IconGasStation },
 ];
 
-export function AuctionCard({
-  session,
-  id,
-  currentPrice,
-  endDate,
-  name,
-  description,
-  images,
-  isHighestBidder,
-  isOwner,
-  isOutbid,
-  bidIncrement,
-}: {
-  session: Session | null;
-  id: number;
-  currentPrice: number;
-  endDate: Date;
-  name: string;
-  description: string;
-  images?: AuctionImage[];
-  isHighestBidder: boolean;
-  isOwner: boolean;
-  isOutbid: boolean;
-  bidIncrement: string;
-}) {
+export function AuctionCard({ id }: { id: number }) {
+  const { getAuction } = useAuctionStore();
+  const auction = getAuction(id);
+
+  if (!auction) return null;
+
+  const { images, endDate, name, description, isOwner, currentPrice } = auction;
+
   const features = mockdata.map((feature) => (
     <Center key={feature.label}>
       <feature.icon size="1.05rem" className={classes.icon} stroke={1.5} />
@@ -93,14 +74,7 @@ export function AuctionCard({
 
       {!isOwner && (
         <Card.Section className={classes.section}>
-          <BidInput
-            session={session}
-            auctionId={id}
-            currentPrice={currentPrice}
-            increment={bidIncrement}
-            isHighestBidder={isHighestBidder}
-            isOutBid={isOutbid}
-          />
+          <BidInput auctionId={id} />
         </Card.Section>
       )}
 

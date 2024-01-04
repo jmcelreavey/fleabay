@@ -16,7 +16,7 @@ import {
 
 import { auth } from "@fleabay/auth";
 
-import Auctions from "../../../components/client/components/auctions";
+import Auctions from "../../../components/client/components/auctions/auctions";
 
 export const metadata: Metadata = {
   title: "Dashboard",
