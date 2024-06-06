@@ -11,6 +11,8 @@ import type { AppRouter } from "@fleabay/api";
 import { appRouter } from "@fleabay/api";
 import { auth } from "@fleabay/auth";
 import { db } from "@fleabay/db";
+import { inngest } from "@fleabay/inngest";
+import * as payment from "@fleabay/payment";
 
 import { endingLink } from "./shared";
 
@@ -43,6 +45,8 @@ export const api = createTRPCNextAppDirServer<AppRouter>({
                 cookie: cookies().toString(),
                 "x-trpc-source": "rsc-invoke",
               },
+              payment,
+              inngest,
             };
           },
         }),

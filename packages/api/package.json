@@ -13,22 +13,23 @@
     "@fleabay/constants": "workspace:*",
     "@fleabay/db": "workspace:*",
     "@fleabay/email": "workspace:*",
-    "@t3-oss/env-nextjs": "^0.7.1",
-    "@trpc/client": "next",
-    "@trpc/server": "next",
-    "dayjs": "^1.11.10",
+    "@t3-oss/env-nextjs": "^0.10.1",
+    "@trpc/client": "11.0.0-next-beta.208",
+    "@trpc/server": "11.0.0-next-beta.208",
+    "dayjs": "^1.11.11",
     "decimal.js": "^10.4.3",
     "superjson": "^2.2.1",
-    "uploadthing": "^6.1.0",
-    "zod": "^3.22.4"
+    "uuid": "^9.0.1",
+    "zod": "^3.23.8",
+    "uploadthing": "^6.1.0"
   },
   "devDependencies": {
     "@fleabay/eslint-config": "workspace:*",
     "@fleabay/prettier-config": "workspace:*",
     "@fleabay/tsconfig": "workspace:*",
-    "eslint": "^8.56.0",
-    "prettier": "^3.1.1",
-    "typescript": "^5.3.3"
+    "eslint": "^9.4.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
   },
   "eslintConfig": {
     "root": true,

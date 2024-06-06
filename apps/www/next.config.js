@@ -6,13 +6,17 @@ module.exports = {
   reactStrictMode: true,
   transpilePackages: ["@fleabay/db", "fleabayto/auth", "@fleabay/api"],
   experimental: {
-    webpackBuildWorker: true,
+    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "http",
+        hostname: "127.0.0.1",
       },
       {
         protocol: "https",

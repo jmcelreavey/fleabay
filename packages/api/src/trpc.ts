@@ -6,18 +6,22 @@ import { ZodError } from "zod";
 import type { Session } from "@fleabay/auth";
 import { auth } from "@fleabay/auth";
 import { db } from "@fleabay/db";
+import { inngest } from "@fleabay/inngest";
+import * as payment from "@fleabay/payment";
 
 // import { env } from "./env.mjs";
 
 interface CreateContextOptions {
   session: Session | null;
   utapi: UTApi;
+  payment: typeof payment;
+  inngest: typeof inngest;
 }
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
-    session: opts.session,
+    ...opts, 
     db,
-    utapi: opts.utapi,
+    payment
   };
 };
 
@@ -35,6 +39,8 @@ export async function createTRPCContext(opts: {
       // fetch: globalThis.fetch,
       // apiKey: env.UPLOADTHING_SECRET,
     }),
+    payment, 
+    inngest
   });
 }
 

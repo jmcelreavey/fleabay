@@ -1,15 +1,15 @@
-# [FleaBay](https://fleabay.northern.ie/) - Your One-Stop Online Auctioning Solution
+# [FleaBay](https://fleabay.northern.ie/)
 
 - **Monorepo**: [TurboRepo](https://turbo.build/)
 - **Framework**: [Next.js](https://nextjs.org/) + [Typescript](https://www.typescriptlang.org/)
-- **Database**: [PlanetScale](https://planetscale.com/)
-- **ORM**: [Drizzle](https://orm.drizzle.team/)
+- **Database, Storage, and Authentication**: [Supabase](https://supabase.com/)
 - **API**: [tRPC](https://trpc.io/) + [TanStack Query](https://tanstack.com/query/)
-- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **Payment**: [Lemon Squeezy](https://www.lemonsqueezy.com/)
 - **Deployment**: [Vercel](https://vercel.com)
 - **Styling**: [Mantine](https://mantine.dev/)
 - **Email**: [React Email](https://react.email/) + [Amazon SES](https://aws.amazon.com/ses/)
 - **Data Validator**: [Zod](https://zod.dev/)
+- **Analytics**: [PostHog](https://posthog.com/)
 
 ## Running Locally
 

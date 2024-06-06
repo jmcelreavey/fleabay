@@ -5,12 +5,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@tabler/icons-react": "^2.44.0",
+    "@tabler/icons-react": "^3.5.0",
     "decimal.js": "^10.4.3",
-    "zod": "^3.22.4"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@fleabay/db": "workspace:*",
-    "@types/node": "^20.10.6"
+    "@types/node": "^20.13.0"
   }
 }
