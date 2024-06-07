@@ -15,19 +15,6 @@ export default function SigninForm() {
     google: false,
     credential: false,
   });
-  // const form = useForm({
-  //   initialValues: {
-  //     email: "",
-  //     password: "",
-  //   },
-  //   : true,
-  //   validate: {
-  //     email: isEmail("Invalid email") || isNotEmpty("Email is required"),
-  //     password: hasLength({ min: 8 }, "Password must be at least 8 characters"),
-  //   },
-  // });
-
-  // const params = useParams();
 
   return (
     <Paper radius="md" p="xl" withBorder shadow="md">
